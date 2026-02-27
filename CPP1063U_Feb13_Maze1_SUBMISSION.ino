@@ -15,6 +15,7 @@
  * I also switched the stater code MTR_L and MTR_R becease it is opposite to how I would preseve left and right (From behind)
  */
 
+#include <Arduino.h>
 #include <Wire.h>
 #include <FastLED.h>
 #include <Servo.h>
