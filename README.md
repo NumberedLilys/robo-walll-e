@@ -7,6 +7,7 @@ The robot is built to function independently by combining hardware components (g
 
 <details>
     <summary>Table of Contents</summary>
+    
     - Name
         - Description
 
@@ -22,7 +23,7 @@ The robot is built to function independently by combining hardware components (g
     - Troubleshooting (Common errors)
 
     - Limitations
-    
+
     - Contributing
 
 </details>
