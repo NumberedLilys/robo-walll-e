@@ -9,14 +9,20 @@ The robot is built to function independently by combining hardware components (g
     <summary>Table of Contents</summary>
     - Name
         - Description
+
     - Requirements
         - Hardware
         - Software / Dependencies 
+
     - Usage
         - What it does
+
     - Structure
+
     - Troubleshooting (Common errors)
+
     - Limitations
+    
     - Contributing
 
 </details>
