@@ -15,7 +15,6 @@
  * I also switched the stater code MTR_L and MTR_R becease it is opposite to how I would preseve left and right (From behind)
  */
 
-<<<<<<< HEAD
 #include <Arduino.h>
 #include <Wire.h>
 #include <FastLED.h>
@@ -59,9 +58,7 @@ int obCounter = 0;
 int distance = 0;
 int state = 0;
 
-=======
 #include "Behaviour.h"
->>>>>>> 7c9e5677144c5edf58a959451a4de0ae339bd9b8
 
 void setup() {
 

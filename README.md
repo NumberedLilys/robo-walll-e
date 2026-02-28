@@ -6,8 +6,8 @@ The robot is built to function independently by combining hardware components (g
 (Photo of robot?)
 
 <details>
-    <summary>Table of Contents</summary>
-    
+    <summary><span style="font-size: 1.3em; font-weight: bold;">Table of Contents</span></summary>
+
     - Name
         - Description
 
