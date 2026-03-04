@@ -70,9 +70,7 @@ It currently has many errors in formatting due to a project structure change.
 
 *   [Lily H](https://github.com/NumberedLilys)
 *   [Frankie A](https://github.com/FrankieAntoine)
-
-*   <a href="https://github.com/NumberedLilys">
-  <img src="https://contrib.rocks" />
+*   <a href="https://github.com/NumberedLilys/robo-walll-e/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=NumberedLilys/robo-walll-e" />
 </a>
-
 
