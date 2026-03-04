@@ -1,4 +1,37 @@
-#include "include//Behaviour.h"
+#include "Behaviour.h"
+
+// Function to turn a set amount of degrees
+void rotate(int targetAngle){
+
+  // Reset the angle for accuracy
+  resetAngle();
+
+  // While loop to rotate until it has reached the given angle
+  while (true){
+    updateGyroAngle();
+
+    // If the target is left, turn left until reaching the target angle
+    if (targetAngle < 0){
+      moveMotors(-SPEED_TURN, SPEED_TURN);
+      if (getAngle() <= targetAngle + INERTIA_ERROR){
+        moveMotors(0, 0);
+        break;
+      }
+    }
+
+    // If the target if right, turn right until reaching the target angle
+    else{
+      moveMotors(SPEED_TURN, -SPEED_TURN);
+      if (getAngle() >= targetAngle - INERTIA_ERROR){
+        moveMotors(0, 0);
+        break;
+      }
+    }
+  }
+
+  // Reset angle back to zero for accuracy
+  resetAngle();
+}
 
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary(){
@@ -86,39 +119,6 @@ void roaming(){
     print("ANG: ");
     println(getAngle());
   }
-}
-
-// Function to turn a set amount of degrees
-void rotate(int targetAngle){
-
-  // Reset the angle for accuracy
-  resetAngle();
-
-  // While loop to rotate until it has reached the given angle
-  while (true){
-    updateGyroAngle();
-
-    // If the target is left, turn left until reaching the target angle
-    if (targetAngle < 0){
-      moveMotors(-SPEED_TURN, SPEED_TURN);
-      if (getAngle() <= targetAngle + INERTIA_ERROR){
-        moveMotors(0, 0);
-        break;
-      }
-    }
-
-    // If the target if right, turn right until reaching the target angle
-    else{
-      moveMotors(SPEED_TURN, -SPEED_TURN);
-      if (getAngle() >= targetAngle - INERTIA_ERROR){
-        moveMotors(0, 0);
-        break;
-      }
-    }
-  }
-
-  // Reset angle back to zero for accuracy
-  resetAngle();
 }
 
 // Function to explore all possible turns about 90 deg in a maze

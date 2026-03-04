@@ -1,4 +1,5 @@
-#include "src//Utility.cpp"
+#pragma once
+#include "Utility.h"
 
 // defining get distance function
 int getDistance();

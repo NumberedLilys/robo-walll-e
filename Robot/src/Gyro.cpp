@@ -1,4 +1,4 @@
-#include "include//Gyro.h"
+#include "Gyro.h"
 
 // ====== GYRO FUNCTIONS ======
 

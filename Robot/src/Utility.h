@@ -1,4 +1,7 @@
-#include "Utility.h"
+#pragma once
+#include <Wire.h>
+#include <FastLED.h>
+#include <Servo.h>
 
 // ====== PIN CONSTANT VALUES ======
 
@@ -27,27 +30,23 @@
 #define MIN_DISTANCE 10
 #define INERTIA_ERROR 2
 
-// // ====== PROGRAM VARIABLES ======
-// int16_t gyroZ;                // Raw gyro Z-axis reading
-// float gyroZOffset = 0;        // Calibration offset
-// float currentAngle = 0;       // Current angle in degrees
-// unsigned long lastTime = 0;   // Last read time
-// CRGB leds[NUM_LEDS];          // Current LED Color values
-// Servo scanServo;              // Servo
-// int obCounter = 0;
-// int distance = 0;
-// int state = 0;
+// ====== PROGRAM VARIABLES ======
+int16_t gyroZ;                // Raw gyro Z-axis reading
+float gyroZOffset = 0;        // Calibration offset
+float currentAngle = 0;       // Current angle in degrees
+unsigned long lastTime = 0;   // Last read time
+CRGB leds[NUM_LEDS];          // Current LED Color values
+Servo scanServo;              // Servo
+int obCounter = 0;
+int distance = 0;
+int state = 0;
 
 // ====== PROGRAM FUNCTIONS ======
 
 // Normal print function to save a little bit of typing each time
 template<typename T>
-void print(T message){
-  Serial.print(message);
-}
+void print(T message);
 
 // println print function to save a little bit of typing each time
 template<typename T>
-void println(T message){
-  Serial.println(message);
-}
+void println(T message);
