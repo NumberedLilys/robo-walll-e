@@ -1,4 +1,9 @@
-#include "Behaviour.h"
+#include "include//Gyro.h"
+#include "include//Led.h"
+#include "include//LineTracking.h"
+#include "include//Motors.h"
+#include "include//Servo.h"
+#include "include//Ultrasonic.h"
 
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary(){
