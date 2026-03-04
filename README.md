@@ -68,25 +68,5 @@ It currently has many errors in formatting due to a project structure change.
 
 ## Contributing
 
-*   [Lily H](https://github.com/NumberedLilys)    <a href="https://github.com/NumberedLilys/robo-walll-e/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NumberedLilys/robo-walll-e" />
-</a>
-*   [Frankie A](https://github.com/FrankieAntoine)
-
-  <table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com">
-        <img src="https://github.com.png" width="100px;" alt="NumberedLilys"/><br />
-        <sub><b>NumberedLilys</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com">
-        <img src="https://github.com.png" width="100px;" alt="FrankieAntoine"/><br />
-        <sub><b>FrankieAntoine</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
-
+*   [Lily H](https://github.com/NumberedLilys) ![GitHub profile picture](https://github.com/NumberedLilys.png)
+*   [Frankie A](https://github.com/FrankieAntoine) ![GitHub profile picture](https://github.com/FrankieAntoine.png)
