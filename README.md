@@ -70,4 +70,4 @@ It currently has many errors in formatting due to a project structure change.
 
 *   [Lily H](https://github.com/NumberedLilys) - Author
 
-*   [Frankie A](https://github.com/FrankieAntoine) -Co-Author
+*   [Frankie A](https://github.com/FrankieAntoine) - Co-Author
