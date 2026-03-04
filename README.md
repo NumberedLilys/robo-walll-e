@@ -70,12 +70,12 @@ It currently has many errors in formatting due to a project structure change.
 
 *   [Lily H](https://github.com/NumberedLilys) <div align="center">
   <!-- NumberedLilys PFP -->
-  <a href="https://github.com">
+  <a href="https://github.com/NumberedLilys">
     <img src="https://raw.githubusercontent.com" width="100" height="100" alt="NumberedLilys" style="border-radius: 50%;">
   </a>
 
   <!-- FrankieAntoine PFP -->
-  <a href="https://github.com">
+  <a href="https://github.com/FrankieAntoine">
     <img src="https://raw.githubusercontent.com" width="100" height="100" alt="FrankieAntoine" style="border-radius: 50%;">
   </a>
 </div>
