@@ -67,3 +67,7 @@ It currently has many errors in formatting due to a project structure change.
 - There is a limited number of hardware functions in the robot itself (no audio, one LED).
 
 ## Contributing
+
+<img width="1346" height="511" alt="Badge" src="https://github.com/user-attachments/assets/d001e531-4f11-484f-a795-4e0797fe942c" />  <img width="1346" height="496" alt="Badge (1)" src="https://github.com/user-attachments/assets/10d2a19a-c90e-4b12-8205-78c5c7c1c01c" />
+
+
