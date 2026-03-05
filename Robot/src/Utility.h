@@ -1,4 +1,5 @@
 #pragma once
+#include <Arduino.h>
 #include <Wire.h>
 #include <FastLED.h>
 #include <Servo.h>
@@ -31,22 +32,26 @@
 #define INERTIA_ERROR 2
 
 // ====== PROGRAM VARIABLES ======
-int16_t gyroZ;                // Raw gyro Z-axis reading
-float gyroZOffset = 0;        // Calibration offset
-float currentAngle = 0;       // Current angle in degrees
-unsigned long lastTime = 0;   // Last read time
-CRGB leds[NUM_LEDS];          // Current LED Color values
-Servo scanServo;              // Servo
-int obCounter = 0;
-int distance = 0;
-int state = 0;
+extern int16_t gyroZ;                // Raw gyro Z-axis reading
+extern float gyroZOffset;        // Calibration offset
+extern float currentAngle;       // Current angle in degrees
+extern unsigned long lastTime;   // Last read time
+extern CRGB leds[NUM_LEDS];          // Current LED Color values
+extern Servo scanServo;              // Servo
+extern int obCounter;
+extern int distance;
+extern int state;
 
 // ====== PROGRAM FUNCTIONS ======
 
 // Normal print function to save a little bit of typing each time
 template<typename T>
-void print(T message);
+void print(T message){
+  Serial.print(message);
+}
 
 // println print function to save a little bit of typing each time
 template<typename T>
-void println(T message);
+void println(T message){
+  Serial.println(message);
+}
