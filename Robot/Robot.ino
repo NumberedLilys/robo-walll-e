@@ -97,5 +97,9 @@ void loop() {
     case 3:
       navigateLine();
       break;
+
+    case 4:
+      navigateWall();
+      break;
   }
 }

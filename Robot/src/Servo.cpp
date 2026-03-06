@@ -14,8 +14,30 @@ void setServoAngle(int angle) {
   }
 }
 
-
 // Center the servo
 void centerServo() {
   setServoAngle(90);
+}
+
+// Set servo with smoothness
+void setServoAngleSmooth(int angle){
+
+  // Turning right smoothly
+  if (angle > 90){
+    for (int i = 90; i <= angle; i = i + 2){
+      setServoAngle(i);
+    }
+  }
+
+  // Turning left smoothly
+  if (angle < 90){
+    for (int i = 90; i >= angle; i = i - 2){
+      setServoAngle(i);
+    }
+  }
+
+  // Set to center
+  if (angle == 90){
+    centerServo();
+  }
 }

@@ -8,3 +8,6 @@ void setServoAngle(int angle);
 
 // Center the servo
 void centerServo();
+
+// Set servo with smoothness
+void setServoAngleSmooth(int angle);

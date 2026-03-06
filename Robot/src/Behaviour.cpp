@@ -108,7 +108,7 @@ void roaming(){
     // If near a wall, stop. Added 0 < .. for invalid readings
     if (0 < distance && distance < MIN_DISTANCE){
       moveMotors(0, 0);
-      state = 0;
+      state = 4;
       break;
     }
 
@@ -130,19 +130,35 @@ void navigateWall(){
     // Start of navigation, turn right 90 deg
     if (obCounter == 0){
       obCounter++;
-      rotate(90);
+      moveMotors(0, 0);
+      setServoAngleSmooth(0);
+      delay(500);
+      if (getDistance() > MIN_DISTANCE){
+        obCounter = 0;
+        centerServo();
+        rotate(90);
+        break;
+      }
     }
 
     // If when turning right the robot cannot go forward, turn 180 deg left
     else if (getDistance() < MIN_DISTANCE && obCounter == 1){
       obCounter++;
-      rotate(-180);
+      setServoAngleSmooth(180);
+      delay(500);
+      if (getDistance() > MIN_DISTANCE){
+        obCounter = 0;
+        centerServo();
+        rotate(-90);
+        break;
+      }
     }
 
     // If the robot still cannot go forward, go back the way it came in (90 deg left)
     else if (getDistance() < MIN_DISTANCE && obCounter == 2){
       obCounter = 0;
-      rotate(-90);
+      centerServo();
+      rotate(-180);
       break;
     } 
 
@@ -154,6 +170,7 @@ void navigateWall(){
   }
 
   // go back to roaming mode
+  centerServo();
   state = 1;
 }
 
