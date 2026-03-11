@@ -39,6 +39,7 @@ extern unsigned long lastTime;   // Last read time
 extern CRGB leds[NUM_LEDS];          // Current LED Color values
 extern Servo scanServo;              // Servo
 extern int obCounter;
+extern int turnCounter;
 extern int distance;
 extern int state;
 
