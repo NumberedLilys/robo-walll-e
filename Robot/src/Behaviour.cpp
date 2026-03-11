@@ -202,12 +202,14 @@ void rightTwoLeft(){
       moveMotors(0, 0);
       delay(500);
       rotate(90);
+      break;
 
-    } else if(turnCounter == 3){
+    } else if(turnCounter >= 3){
       turnCounter = 0;
       moveMotors(0, 0);
       delay(500);
       rotate(-90);
+      break;
     }
   }
 
