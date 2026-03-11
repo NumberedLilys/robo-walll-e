@@ -204,11 +204,15 @@ void rightTwoLeft(){
       rotate(90);
       break;
 
-    } else if(turnCounter >= 3){
+    } else if(turnCounter >= 2){
       turnCounter = 0;
       // moveMotors(0, 0);
       delay(500);
       rotate(-90);
+      if (getDistance() < MIN_DISTANCE){
+        rotate(180);
+        turnCounter = 2;
+      }
       break;
     }
   }

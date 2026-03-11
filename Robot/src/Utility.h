@@ -29,7 +29,7 @@
 #define LINE_THRESHOLD_BLACK 900
 #define LINE_THRESHOLD_WHITE 200
 #define MIN_DISTANCE 20
-#define INERTIA_ERROR 2
+#define INERTIA_ERROR 1       // Higher if on less frictiony surface
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading
