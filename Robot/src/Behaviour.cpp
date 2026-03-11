@@ -199,14 +199,14 @@ void rightTwoLeft(){
     // Start of navigation, turn right 90 deg
     if (turnCounter < 2){
       turnCounter++;
-      moveMotors(0, 0);
+      // moveMotors(0, 0);
       delay(500);
       rotate(90);
       break;
 
     } else if(turnCounter >= 3){
       turnCounter = 0;
-      moveMotors(0, 0);
+      // moveMotors(0, 0);
       delay(500);
       rotate(-90);
       break;
