@@ -203,7 +203,6 @@ void rightTwoLeft(){
       setServoAngleSmooth(0);
       delay(500);
       if (getDistance() > MIN_DISTANCE){
-        turnCounter = 0;
         centerServo();
         rotate(90);
         break;
