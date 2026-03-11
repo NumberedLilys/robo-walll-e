@@ -208,6 +208,13 @@ void rightTwoLeft(){
         rotate(90);
         break;
       }
+    } else if(obCounter == 3){
+      if (getDistance() > MIN_DISTANCE){
+        obCounter = 0;
+        centerServo();
+        rotate(-90);
+        break;
+      }
     }
 
     // If when turning right the robot cannot go forward, turn 180 deg left
