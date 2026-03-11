@@ -8,5 +8,6 @@ unsigned long lastTime = 0;   // Last read time
 CRGB leds[NUM_LEDS];          // Current LED Color values
 Servo scanServo;              // Servo
 int obCounter = 0;
+int turnCounter = 0;
 int distance = 0;
 int state = 0;
