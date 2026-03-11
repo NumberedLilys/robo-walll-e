@@ -90,7 +90,7 @@ void loop() {
     
     // Navigate all 90 deg turns (NOT USED)
     case 2:
-      navigateWall();
+      rightTwoLeft();
       break;
 
     // navigate line
