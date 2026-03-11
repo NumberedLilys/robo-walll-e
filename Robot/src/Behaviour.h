@@ -29,3 +29,6 @@ void navigateLine();
 
 // Function to follow a line (NOT USED)
 void followLine(int lightThreshold);
+
+// Function that turns right twice and then left
+void rightTwoLeft();
