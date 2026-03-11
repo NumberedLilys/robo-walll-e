@@ -208,8 +208,11 @@ void rightTwoLeft(){
         break;
       }
     } else if(turnCounter == 3){
+      turnCounter = 0;
+      moveMotors(0, 0);
+      setServoAngleSmooth(180);
+      delay(500);
       if (getDistance() > MIN_DISTANCE){
-        turnCounter = 0;
         centerServo();
         rotate(-90);
         break;

@@ -99,7 +99,7 @@ void loop() {
       break;
 
     case 4:
-      navigateWall();
+      rightTwoLeft();
       break;
   }
 }
