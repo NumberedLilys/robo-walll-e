@@ -189,3 +189,58 @@ void navigateLine(){
 void followLine(int lightThreshold){
   state = -1;
 }
+
+void rightTwoLeft(){
+  // Navigate wall by turning right 2 times and then left once. Counts How many walls/obstacles
+
+  // While loop to check all possible outcomes
+  while (true){
+
+    // Start of navigation, turn right 90 deg
+    if (obCounter < 2){
+      obCounter++;
+      moveMotors(0, 0);
+      setServoAngleSmooth(0);
+      delay(500);
+      if (getDistance() > MIN_DISTANCE){
+        obCounter = 0;
+        centerServo();
+        rotate(90);
+        break;
+      }
+    }
+
+    // If when turning right the robot cannot go forward, turn 180 deg left
+    
+    
+    // else if (getDistance() < MIN_DISTANCE && obCounter == 1){
+    //   obCounter++;
+    //   setServoAngleSmooth(180);
+    //   delay(500);
+    //   if (getDistance() > MIN_DISTANCE){
+    //     obCounter = 0;
+    //     centerServo();
+    //     rotate(-90);
+    //     break;
+    //   }
+    // }
+
+    // // If the robot still cannot go forward, go back the way it came in (90 deg left)
+    // else if (getDistance() < MIN_DISTANCE && obCounter == 2){
+    //   obCounter = 0;
+    //   centerServo();
+    //   rotate(-180);
+    //   break;
+    // } 
+
+    // // If it can go forward, reset the obCounter variable
+    // else{
+    //   obCounter = 0;
+    //   break;
+    // }
+  }
+
+  // go back to roaming mode
+  centerServo();
+  state = 1;
+}
