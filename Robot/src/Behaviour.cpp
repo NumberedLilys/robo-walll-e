@@ -197,54 +197,25 @@ void rightTwoLeft(){
   while (true){
 
     // Start of navigation, turn right 90 deg
-    if (obCounter < 2){
-      obCounter++;
+    if (turnCounter < 2){
+      turnCounter++;
       moveMotors(0, 0);
       setServoAngleSmooth(0);
       delay(500);
       if (getDistance() > MIN_DISTANCE){
-        obCounter = 0;
+        turnCounter = 0;
         centerServo();
         rotate(90);
         break;
       }
-    } else if(obCounter == 3){
+    } else if(turnCounter == 3){
       if (getDistance() > MIN_DISTANCE){
-        obCounter = 0;
+        turnCounter = 0;
         centerServo();
         rotate(-90);
         break;
       }
     }
-
-    // If when turning right the robot cannot go forward, turn 180 deg left
-    
-    
-    // else if (getDistance() < MIN_DISTANCE && obCounter == 1){
-    //   obCounter++;
-    //   setServoAngleSmooth(180);
-    //   delay(500);
-    //   if (getDistance() > MIN_DISTANCE){
-    //     obCounter = 0;
-    //     centerServo();
-    //     rotate(-90);
-    //     break;
-    //   }
-    // }
-
-    // // If the robot still cannot go forward, go back the way it came in (90 deg left)
-    // else if (getDistance() < MIN_DISTANCE && obCounter == 2){
-    //   obCounter = 0;
-    //   centerServo();
-    //   rotate(-180);
-    //   break;
-    // } 
-
-    // // If it can go forward, reset the obCounter variable
-    // else{
-    //   obCounter = 0;
-    //   break;
-    // }
   }
 
   // go back to roaming mode
