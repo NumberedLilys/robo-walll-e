@@ -6,3 +6,8 @@
 void ledOn(CRGB color);
 
 void ledOff();
+
+void initializeLedColors(CRGB colorList[]);
+
+void setLed(int state);
+

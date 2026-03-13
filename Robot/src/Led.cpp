@@ -11,3 +11,11 @@ void ledOff() {
   leds[0] = CRGB::Black;
   FastLED.show();
 }
+
+void initializeLedColors(CRGB colorList[]){
+  
+}
+
+void setLed(int state){
+
+}
