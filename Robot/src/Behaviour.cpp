@@ -66,20 +66,22 @@ void roaming(){
 
     // Checks for lines and adjusts if necessary
 
+    lineAdjust();
+
     // Center Line Sensor (Not Used)
-    if (!offLine(2)){
-      break;
-    }
+    // if (!offLine(2)){
+    //   break;
+    // }
 
-    // Left Line sensor (Not Used)
-    else if (!offLine(1)){
-      break;
-    }
+    // // Left Line sensor (Not Used)
+    // else if (!offLine(1)){
+    //   break;
+    // }
 
-    // Right Line sensor (Not Used)
-    else if (!offLine(3)){
-      break;
-    }
+    // // Right Line sensor (Not Used)
+    // else if (!offLine(3)){
+    //   break;
+    // }
 
     // ======== Gyro Tracking ========
 
