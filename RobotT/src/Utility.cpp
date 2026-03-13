@@ -1,4 +1,5 @@
 #include "Utility.h"
+#include "Ultrasonic.h"
 
 // ====== PROGRAM VARIABLES ======
 int16_t gyroZ;                // Raw gyro Z-axis reading
@@ -11,3 +12,17 @@ int obCounter = 0;
 int turnCounter = 0;
 int distance = 0;
 int state = 0;
+
+// Function to print all info for testing purposes
+void printInfo(){
+    println("PROGRAM INFO:");
+    print("[LIGHT LEVELS] ");
+    print(analogRead(LINE_L));
+    print(" | ");
+    print(analogRead(LINE_C));
+    print(" | ");
+    println(analogRead(LINE_R));
+    print("[DISTANCE] ");
+    println(getDistance());
+    delay(150);
+}

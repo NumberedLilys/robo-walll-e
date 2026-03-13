@@ -45,6 +45,9 @@ extern int state;
 
 // ====== PROGRAM FUNCTIONS ======
 
+// Function to print all info for testing purposes
+void printInfo();
+
 // Normal print function to save a little bit of typing each time
 template<typename T>
 void print(T message){

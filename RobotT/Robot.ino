@@ -70,11 +70,7 @@ void loop() {
     // Test case
     case -1:
       stationary();
-      print("[LIGHT LEVEL] ");
-      print(analogRead(LINE_C));
-      print(" / ");
-      print("[DISTANCE] ");
-      println(getDistance());
+      printInfo();
       break;
 
     // Stationary
@@ -88,17 +84,8 @@ void loop() {
       roaming();
       break;
     
-    // Navigate all 90 deg turns (NOT USED)
+    // Turning method
     case 2:
-      rightTwoLeft();
-      break;
-
-    // navigate line
-    case 3:
-      navigateLine();
-      break;
-
-    case 4:
       rightTwoLeft();
       break;
   }
