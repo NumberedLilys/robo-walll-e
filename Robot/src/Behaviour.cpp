@@ -5,8 +5,10 @@ void rotate(int targetAngle){
 
   // If angle is 180 or -180, rotate 90 or -90 twice
   if (targetAngle == 180 || targetAngle == -180){
+    largeAngle = true;
     rotate(targetAngle/2);
     rotate(targetAngle/2);
+    resetAngle();
   }else{
 
     // Reset the angle at the beginning for accuracy
@@ -35,8 +37,11 @@ void rotate(int targetAngle){
     }
 
     // Reset angle back to zero for accuracy
-    resetAngle();
+    if (!largeAngle){
+      resetAngle();
+    }
   }
+  largeAngle = false;
 }
 
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
