@@ -37,6 +37,7 @@ extern float gyroZOffset;        // Calibration offset
 extern float currentAngle;       // Current angle in degrees
 extern unsigned long lastTime;   // Last read time
 extern CRGB leds[NUM_LEDS];          // Current LED Color values
+extern CRGB stateColors[];
 extern Servo scanServo;              // Servo
 extern int obCounter;
 extern int turnCounter;

@@ -2,6 +2,7 @@
 
 // Function to turn a set amount of degrees
 void rotate(int targetAngle){
+  setLed(state);
 
   // If angle is 180 or -180, rotate 90 or -90 twice
   if (targetAngle == 180 || targetAngle == -180){
@@ -46,6 +47,7 @@ void rotate(int targetAngle){
 
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary(){
+  setLed(state);
 
   // Wait for button press
   while (digitalRead(BUTTON) == HIGH){}
@@ -60,6 +62,7 @@ void stationary(){
 
 // A function that runs the default state of the robot
 void roaming(){
+  setLed(state);
   moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   while (true){
     // ======== Line Tracking ========

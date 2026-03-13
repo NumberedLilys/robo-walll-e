@@ -12,10 +12,7 @@ void ledOff() {
   FastLED.show();
 }
 
-void initializeLedColors(CRGB colorList[]){
-  
-}
-
 void setLed(int state){
-
+  leds[0] = stateColors[state];
+  FastLED.show();
 }
