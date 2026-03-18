@@ -67,6 +67,8 @@ void followLine(){
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   } else if (offLine(3)){
     moveMotors(SPEED_NORMAL, SPEED_TURN);
+  } else if (allOffLine()){
+    state = 1;
   }
 }
 

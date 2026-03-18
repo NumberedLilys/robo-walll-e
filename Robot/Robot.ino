@@ -88,5 +88,9 @@ void loop() {
     case 2:
       rightTwoLeft();
       break;
+
+    case 3:
+      followLine();
+      break;
   }
 }

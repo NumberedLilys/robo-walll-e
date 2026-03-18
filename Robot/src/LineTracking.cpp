@@ -65,6 +65,7 @@ void lineAdjustAway(){
     // state of line following or something (state = #)
     moveMotors(0, 0);
     delay(500);
+    state = 3;
   }
 
   // Right Line sensor
