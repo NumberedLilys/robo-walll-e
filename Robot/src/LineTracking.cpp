@@ -53,6 +53,7 @@ bool anyOffLine(){
 }
 
 void lineAdjustAway(){
+  printInfo();
   setLed(state);
   // ======== Line Tracking ========
 
@@ -75,7 +76,7 @@ void lineAdjustAway(){
     moveMotors(SPEED_TURN, SPEED_NORMAL);
   }
 
-  else if (allOffLine){
+  else if (allOffLine()){
     state = 1;
   }
 

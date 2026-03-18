@@ -88,8 +88,6 @@ void roaming(){
       break;
     }
 
-    lineAdjustAway();
-    
     // ======== Gyro Tracking ========
 
     // Adjusts for drift (0.5 deg)
