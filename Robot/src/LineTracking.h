@@ -8,4 +8,6 @@ bool offLine(int lineTracker);
 bool allOffLine();
 
 // Function to adjust the robot's direction if it detects a line
-void lineAdjust();
+void lineAdjustAway();
+
+void followLine();

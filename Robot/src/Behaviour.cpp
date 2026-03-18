@@ -60,6 +60,16 @@ void stationary(){
 
 }
 
+void followLine(){
+  if offLine(1){
+    moveMotors(SPEED_TURN, SPEED_NORMAL);
+  } else if (offLine(2)){
+    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+  } else if (offLine(3)){
+    moveMotors(SPEED_NORMAL, SPEED_TURN);
+  }
+}
+
 // A function that runs the default state of the robot
 void roaming(){
   setLed(state);
@@ -69,7 +79,7 @@ void roaming(){
 
     // Checks for lines and adjusts if necessary
 
-    lineAdjust();
+    lineAdjustAway();
 
     // Center Line Sensor (Not Used)
     // if (!offLine(2)){

@@ -42,7 +42,7 @@ bool allOffLine(){
     }
 }
 
-void lineAdjust(){
+void lineAdjustAway(){
   // ======== Line Tracking ========
 
   // Checks for lines and adjusts if necessary
