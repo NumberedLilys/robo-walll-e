@@ -1,4 +1,5 @@
 #include "LineTracking.h"
+#include "Led.h"
 #include "Motors.h"
 
 // Bool function to check if only one specified line tracker is off the line
@@ -33,7 +34,7 @@ bool offLine(int lineTracker){
     }
 }
 
-// Bool function to check if all are off the line (NOT USED)
+// Bool function to check if all are off the line
 bool allOffLine(){
   if (offLine(1) && offLine(3) && offLine(2)){
     return true;
@@ -42,7 +43,17 @@ bool allOffLine(){
     }
 }
 
+// Bool function to check if any are off the line
+bool anyOffLine(){
+  if (offLine(1) || offLine(3) || offLine(2)){
+    return true;
+  } else {
+    return false;
+    }
+}
+
 void lineAdjustAway(){
+  setLed(state);
   // ======== Line Tracking ========
 
   // Checks for lines and adjusts if necessary
@@ -50,33 +61,25 @@ void lineAdjustAway(){
   // Left Line sensor
   if (!offLine(1)){ // if left is on the line, adjust right
     moveMotors(SPEED_NORMAL, SPEED_TURN);
-    // delay(200);
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-    // delay(200);
-
-    moveMotors(SPEED_TURN, SPEED_NORMAL); // back to normal direction
-    // delay(100);
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-    // state = 1; // if in roaming, not necessary to change state
   }
 
   // Center Line Sensor
   else if (!offLine(2)){ // if center is on the line, break and go to line tracking mode? Or turn around?
     // state of line following or something (state = #)
     moveMotors(0, 0);
-    // delay(500);
-    // state = 3;
+    delay(500);
   }
 
   // Right Line sensor
   else if (!offLine(3)){ // if right is on the line, adjust left
     moveMotors(SPEED_TURN, SPEED_NORMAL);
-    // delay(200);
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+  }
 
-    moveMotors(SPEED_NORMAL, SPEED_TURN); // back to normal direction
-    // delay(100);
+  else if (allOffLine){
+    state = 1;
+  }
+
+  else{
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-    // state = 1; // if in roaming, not necessary to change state
   }
 }

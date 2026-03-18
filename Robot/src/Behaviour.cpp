@@ -83,6 +83,11 @@ void roaming(){
 
     // Checks for lines and adjusts if necessary
 
+    if (!anyOffLine()){
+      state = 3;
+      break;
+    }
+
     lineAdjustAway();
     
     // ======== Gyro Tracking ========

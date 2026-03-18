@@ -89,9 +89,8 @@ void loop() {
       rightTwoLeft();
       break;
 
-    // case 3:
-    //   setLed(3);
-    //   followLine();
-    //   break;
+    case 3:
+      lineAdjustAway();
+      break;
   }
 }
