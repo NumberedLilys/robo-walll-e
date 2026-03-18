@@ -50,12 +50,12 @@ void lineAdjustAway(){
   // Left Line sensor
   if (!offLine(1)){ // if left is on the line, adjust right
     moveMotors(SPEED_NORMAL, SPEED_TURN);
-    delay(200);
+    // delay(200);
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-    delay(200);
+    // delay(200);
 
     moveMotors(SPEED_TURN, SPEED_NORMAL); // back to normal direction
-    delay(100);
+    // delay(100);
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
     // state = 1; // if in roaming, not necessary to change state
   }
@@ -64,18 +64,18 @@ void lineAdjustAway(){
   else if (!offLine(2)){ // if center is on the line, break and go to line tracking mode? Or turn around?
     // state of line following or something (state = #)
     moveMotors(0, 0);
-    delay(500);
-    state = 3;
+    // delay(500);
+    // state = 3;
   }
 
   // Right Line sensor
   else if (!offLine(3)){ // if right is on the line, adjust left
     moveMotors(SPEED_TURN, SPEED_NORMAL);
-    delay(200);
+    // delay(200);
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
 
     moveMotors(SPEED_NORMAL, SPEED_TURN); // back to normal direction
-    delay(100);
+    // delay(100);
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
     // state = 1; // if in roaming, not necessary to change state
   }

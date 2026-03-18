@@ -60,17 +60,19 @@ void stationary(){
 
 }
 
-void followLine(){
-  if offLine(1){
-    moveMotors(SPEED_TURN, SPEED_NORMAL);
-  } else if (offLine(2)){
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-  } else if (offLine(3)){
-    moveMotors(SPEED_NORMAL, SPEED_TURN);
-  } else if (allOffLine()){
-    state = 1;
-  }
-}
+// void followLine(){
+//   if (offLine(1)){
+//     moveMotors(SPEED_TURN, SPEED_NORMAL);
+//   } else if (offLine(2)){
+//     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+//   } else if (offLine(3)){
+//     moveMotors(SPEED_NORMAL, SPEED_TURN);
+//   } else if (allOffLine()){
+//     state = 1;
+//   } else {
+//     moveMotors(-50, -50);
+//   }
+// }
 
 // A function that runs the default state of the robot
 void roaming(){
@@ -82,22 +84,7 @@ void roaming(){
     // Checks for lines and adjusts if necessary
 
     lineAdjustAway();
-
-    // Center Line Sensor (Not Used)
-    // if (!offLine(2)){
-    //   break;
-    // }
-
-    // // Left Line sensor (Not Used)
-    // else if (!offLine(1)){
-    //   break;
-    // }
-
-    // // Right Line sensor (Not Used)
-    // else if (!offLine(3)){
-    //   break;
-    // }
-
+    
     // ======== Gyro Tracking ========
 
     // Adjusts for drift (0.5 deg)
