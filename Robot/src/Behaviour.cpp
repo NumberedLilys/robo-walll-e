@@ -223,15 +223,15 @@ void lineAdjustAway(){
   }
 
   // Left Line Sensor
-  else if (!offLine(1)){ // if left is on the line, adjust right
+  if (!offLine(1)){ // if left is on the line, adjust right
     rotate(1);
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+    // moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   }
 
   // Right Line sensor
   else if (!offLine(3)){ // if right is on the line, adjust left
     rotate(-1);
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+    // moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   }
   
   else{
