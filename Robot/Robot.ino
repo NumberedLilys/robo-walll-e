@@ -22,6 +22,7 @@ void setup() {
   // setup LED
   FastLED.addLeds<NEOPIXEL, PIN_RBGLED>(leds, NUM_LEDS);
   FastLED.setBrightness(50); // 0-255
+  ledOn(CRGB::Black);
   
   // Motor pins
   pinMode(PWR_R, OUTPUT);
@@ -75,21 +76,25 @@ void loop() {
 
     // Stationary
     case 0:
+      setLed(state);
       stationary();
       state = 1;
       break;
 
     // Forward
     case 1:
+      setLed(state);
       roaming();
       break;
     
     // Turning method
     case 2:
+      setLed(state); 
       rightTwoLeft();
       break;
 
     case 3:
+      setLed(state);
       lineAdjustAway();
       break;
   }

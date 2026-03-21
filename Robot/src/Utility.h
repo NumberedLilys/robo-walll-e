@@ -44,6 +44,9 @@ extern int turnCounter;
 extern int largeAngle;
 extern int distance;
 extern int state;
+extern int lineRValue;
+extern int lineCValue;
+extern int lineLValue;
 
 // ====== PROGRAM FUNCTIONS ======
 

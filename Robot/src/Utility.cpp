@@ -14,6 +14,9 @@ int turnCounter = 0;
 int largeAngle = false;
 int distance = 0;
 int state = 0;
+int lineRValue = 0;
+int lineCValue = 0;
+int lineLValue = 0;
 
 // Function to print all info for testing purposes
 void printInfo(){

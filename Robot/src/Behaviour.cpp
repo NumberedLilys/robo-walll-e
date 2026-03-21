@@ -2,7 +2,6 @@
 
 // Function to turn a set amount of degrees
 void rotate(int targetAngle){
-  setLed(state);
 
   // If angle is 180 or -180, rotate 90 or -90 twice
   if (targetAngle == 180 || targetAngle == -180){
@@ -47,7 +46,6 @@ void rotate(int targetAngle){
 
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary(){
-  setLed(state);
 
   // Wait for button press
   while (digitalRead(BUTTON) == HIGH){}
@@ -76,7 +74,6 @@ void stationary(){
 
 // A function that runs the default state of the robot
 void roaming(){
-  setLed(state);
   moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   while (true){
     // ======== Line Tracking ========
@@ -87,6 +84,23 @@ void roaming(){
       state = 3;
       break;
     }
+
+    // updateLineTrackers();
+    // if (!offLine(2)){
+    //   moveMotors(0, 0);
+    //   state = 2;
+    //   break;
+    // }
+    // else if (!offLine(1) || !offLine(3)){
+    //   moveMotors(0, 0);
+    //   if (!offLine(1)){
+    //     rotate(1);
+    //   }
+    //   else{
+    //     rotate(-1);
+    //   }
+    //   break;
+    // }
 
     // ======== Gyro Tracking ========
 
@@ -210,7 +224,6 @@ void rightTwoLeft(){
 }
 
 void lineAdjustAway(){
-  setLed(state);
   moveMotors(0, 0);
   // ======== Line Tracking ========
 
@@ -223,17 +236,15 @@ void lineAdjustAway(){
   }
 
   // Left Line Sensor
-  if (!offLine(1)){ // if left is on the line, adjust right
+  else if (!offLine(1)){ // if left is on the line, adjust right
     rotate(1);
-    // moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   }
 
   // Right Line sensor
   else if (!offLine(3)){ // if right is on the line, adjust left
     rotate(-1);
-    // moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   }
-  
+
   else{
     state = 1;
   }

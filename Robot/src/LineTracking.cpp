@@ -5,7 +5,7 @@ bool offLine(int lineTracker){
 
   // Left tracker
   if (lineTracker == 1){
-    if ((LINE_THRESHOLD_WHITE < analogRead(LINE_L)) && (analogRead(LINE_L) < LINE_THRESHOLD_BLACK)){
+    if ((LINE_THRESHOLD_WHITE < lineLValue) && (lineLValue < LINE_THRESHOLD_BLACK)){
       return true;
     } else {
       return false;
@@ -13,7 +13,7 @@ bool offLine(int lineTracker){
 
   // Right tracker
   } else if (lineTracker == 3){
-    if (LINE_THRESHOLD_WHITE < analogRead(LINE_R) && analogRead(LINE_R) < LINE_THRESHOLD_BLACK){
+    if ((LINE_THRESHOLD_WHITE < lineRValue) && (lineRValue < LINE_THRESHOLD_BLACK)){
       return true;
     } else {
       return false;
@@ -21,7 +21,7 @@ bool offLine(int lineTracker){
 
   // Centre tracker
   } else if (lineTracker == 2){
-    if ((LINE_THRESHOLD_WHITE < analogRead(LINE_C)) && (analogRead(LINE_C) < LINE_THRESHOLD_BLACK)){
+    if ((LINE_THRESHOLD_WHITE < lineCValue) && (lineCValue < LINE_THRESHOLD_BLACK)){
       return true;
     } else {
       return false;
@@ -48,4 +48,10 @@ bool anyOffLine(){
   } else {
     return false;
     }
+}
+
+void updateLineTrackers(){
+  lineRValue = analogRead(LINE_R);
+  lineCValue = analogRead(LINE_C);
+  lineLValue = analogRead(LINE_L);
 }
