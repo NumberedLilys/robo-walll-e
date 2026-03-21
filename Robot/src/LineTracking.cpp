@@ -42,8 +42,8 @@ bool allOffLine(){
 }
 
 // Bool function to check if any are off the line
-bool anyOffLine(){
-  if (offLine(1) || offLine(3) || offLine(2)){
+bool anyOnLine(){
+  if (!offLine(1) || !offLine(3) || !offLine(2)){
     return true;
   } else {
     return false;

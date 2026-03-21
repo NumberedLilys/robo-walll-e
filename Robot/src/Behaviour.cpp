@@ -80,7 +80,9 @@ void roaming(){
 
     // Checks for lines and adjusts if necessary
 
-    if (!anyOffLine()){
+    updateLineTrackers();
+
+    if (anyOnLine()){
       state = 3;
       break;
     }
@@ -211,7 +213,8 @@ void rightTwoLeft(){
       rotate(-90);
 
       // instead, turn 180 if cannot go forward after turning left
-      if (getDistance() < MIN_DISTANCE){
+      distance = getDistance();
+      if (0 < distance && distance < MIN_DISTANCE){
         rotate(180);
         turnCounter = 2;
       }
@@ -224,14 +227,14 @@ void rightTwoLeft(){
 }
 
 void lineAdjustAway(){
-  moveMotors(0, 0);
+  updateLineTrackers();
   // ======== Line Tracking ========
 
   // Checks for lines and adjusts if necessary
 
   // Center Line sensor
   if (!offLine(2)){ // if center is on the line, break and go to line tracking mode? Or turn around?
-    // state of line following or something (state = #)
+    moveMotors(0, 0);
     state = 2;
   }
 
