@@ -233,12 +233,8 @@ void lineAdjustAway(){
     rotate(-1);
     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   }
-
-  if (allOffLine()){
-    state = 1;
-  }
-
+  
   else{
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+    state = 1;
   }
 }
