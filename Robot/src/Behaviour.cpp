@@ -208,3 +208,37 @@ void rightTwoLeft(){
   // go back to roaming mode
   state = 1;
 }
+
+void lineAdjustAway(){
+  setLed(state);
+  moveMotors(0, 0);
+  // ======== Line Tracking ========
+
+  // Checks for lines and adjusts if necessary
+
+  // Center Line sensor
+  if (!offLine(2)){ // if center is on the line, break and go to line tracking mode? Or turn around?
+    // state of line following or something (state = #)
+    state = 2;
+  }
+
+  // Left Line Sensor
+  else if (!offLine(1)){ // if left is on the line, adjust right
+    rotate(1);
+    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+  }
+
+  // Right Line sensor
+  else if (!offLine(3)){ // if right is on the line, adjust left
+    rotate(-1);
+    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+  }
+
+  if (allOffLine()){
+    state = 1;
+  }
+
+  else{
+    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+  }
+}

@@ -1,6 +1,4 @@
 #include "LineTracking.h"
-#include "Led.h"
-#include "Motors.h"
 
 // Bool function to check if only one specified line tracker is off the line
 bool offLine(int lineTracker){
@@ -50,37 +48,4 @@ bool anyOffLine(){
   } else {
     return false;
     }
-}
-
-void lineAdjustAway(){
-  printInfo();
-  setLed(state);
-  // ======== Line Tracking ========
-
-  // Checks for lines and adjusts if necessary
-
-  // Left Line sensor
-  if (!offLine(1)){ // if left is on the line, adjust right
-    moveMotors(SPEED_NORMAL, SPEED_TURN);
-  }
-
-  // Center Line Sensor
-  else if (!offLine(2)){ // if center is on the line, break and go to line tracking mode? Or turn around?
-    // state of line following or something (state = #)
-    moveMotors(0, 0);
-    delay(500);
-  }
-
-  // Right Line sensor
-  else if (!offLine(3)){ // if right is on the line, adjust left
-    moveMotors(SPEED_TURN, SPEED_NORMAL);
-  }
-
-  else if (allOffLine()){
-    state = 1;
-  }
-
-  else{
-    moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-  }
 }
