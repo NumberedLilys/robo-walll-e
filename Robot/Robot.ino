@@ -22,7 +22,7 @@ void setup() {
   // setup LED
   FastLED.addLeds<NEOPIXEL, PIN_RBGLED>(leds, NUM_LEDS);
   FastLED.setBrightness(50); // 0-255
-  ledOn(CRGB::Black);
+  ledOff();
   
   // Motor pins
   pinMode(PWR_R, OUTPUT);

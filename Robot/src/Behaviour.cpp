@@ -226,15 +226,18 @@ void rightTwoLeft(){
   state = 1;
 }
 
+// A function that Checks for lines and adjusts if necessary
 void lineAdjustAway(){
-  moveMotors(0, 0);
-  // ======== Line Tracking ========
 
-  // Checks for lines and adjusts if necessary
+  // Stop when a line is detected
+  moveMotors(0, 0);
 
   // Center Line sensor
-  if (!offLine(2)){ // if center is on the line, break and go to line tracking mode? Or turn around?
-    state = 2;
+  if (!offLine(2)){ // if center is on the line, call right two left and go backward for a little bit
+    rightTwoLeft();
+    moveMotors(-50, -50);
+    delay(300);
+    moveMotors(0, 0);
   }
 
   // Left Line Sensor
@@ -247,10 +250,12 @@ void lineAdjustAway(){
     rotate(-2);
   }
 
+  // If not on a line, go to roaming
   else{
     state = 1;
   }
 
+  // Update sensors at the end for the next loop
   updateLineTrackers();
 
 }

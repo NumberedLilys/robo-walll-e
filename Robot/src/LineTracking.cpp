@@ -50,6 +50,7 @@ bool anyOnLine(){
     }
 }
 
+// A function that updates the global line tracker values to deduce the use of analogRead
 void updateLineTrackers(){
   lineRValue = analogRead(LINE_R);
   lineCValue = analogRead(LINE_C);

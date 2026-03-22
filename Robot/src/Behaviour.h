@@ -20,3 +20,6 @@ void navigateWall();
 
 // Function that turns right twice and then left
 void rightTwoLeft();
+
+// A function that Checks for lines and adjusts if necessary
+void lineAdjustAway();

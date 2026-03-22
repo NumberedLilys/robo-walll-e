@@ -10,11 +10,8 @@ bool allOffLine();
 // Bool function to check if any are on the line
 bool anyOnLine();
 
-// Function to adjust the robot's direction if it detects a line
-void lineAdjustAway();
-
 // UNUSED FUNCTION
 void followLine();
 
-// Function that updates the values for the line trackers. Prevents delays from analogRead
+// A function that updates the global line tracker values to deduce the use of analogRead
 void updateLineTrackers();

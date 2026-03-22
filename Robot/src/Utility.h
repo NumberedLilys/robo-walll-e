@@ -29,17 +29,17 @@
 #define LINE_THRESHOLD_BLACK 900
 #define LINE_THRESHOLD_WHITE 200
 #define MIN_DISTANCE 20
-#define INERTIA_ERROR 1       // Higher if on less frictiony surface (Higher number undershots the turn)
+#define INERTIA_ERROR 2       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading
-extern float gyroZOffset;        // Calibration offset
-extern float currentAngle;       // Current angle in degrees
-extern unsigned long lastTime;   // Last read time
+extern float gyroZOffset;            // Calibration offset
+extern float currentAngle;           // Current angle in degrees
+extern unsigned long lastTime;       // Last read time
 extern CRGB leds[NUM_LEDS];          // Current LED Color values
-extern CRGB stateColors[];
+extern CRGB stateColors[];           // Array of colors
 extern Servo scanServo;              // Servo
-extern int obCounter;
+extern int obCounter;              
 extern int turnCounter;
 extern int largeAngle;
 extern int distance;
