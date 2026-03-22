@@ -25,24 +25,33 @@
 // ====== PROGRAM CONSTANTS ======
 #define SPEED_NORMAL 100
 #define SPEED_DRIFT 85
-#define SPEED_TURN 60
+#define SPEED_TURN 75
 #define LINE_THRESHOLD_BLACK 900
 #define LINE_THRESHOLD_WHITE 200
 #define MIN_DISTANCE 20
-#define INERTIA_ERROR 2
+#define INERTIA_ERROR 2       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading
-extern float gyroZOffset;        // Calibration offset
-extern float currentAngle;       // Current angle in degrees
-extern unsigned long lastTime;   // Last read time
+extern float gyroZOffset;            // Calibration offset
+extern float currentAngle;           // Current angle in degrees
+extern unsigned long lastTime;       // Last read time
 extern CRGB leds[NUM_LEDS];          // Current LED Color values
+extern CRGB stateColors[];           // Array of colors
 extern Servo scanServo;              // Servo
-extern int obCounter;
+extern int obCounter;              
+extern int turnCounter;
+extern int largeAngle;
 extern int distance;
 extern int state;
+extern int lineRValue;
+extern int lineCValue;
+extern int lineLValue;
 
 // ====== PROGRAM FUNCTIONS ======
+
+// Function to print all info for testing purposes
+void printInfo();
 
 // Normal print function to save a little bit of typing each time
 template<typename T>

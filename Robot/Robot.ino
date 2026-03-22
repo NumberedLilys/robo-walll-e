@@ -22,6 +22,7 @@ void setup() {
   // setup LED
   FastLED.addLeds<NEOPIXEL, PIN_RBGLED>(leds, NUM_LEDS);
   FastLED.setBrightness(50); // 0-255
+  ledOff();
   
   // Motor pins
   pinMode(PWR_R, OUTPUT);
@@ -70,36 +71,31 @@ void loop() {
     // Test case
     case -1:
       stationary();
-      print("[LIGHT LEVEL] ");
-      print(analogRead(LINE_C));
-      print(" / ");
-      print("[DISTANCE] ");
-      println(getDistance());
+      printInfo();
       break;
 
     // Stationary
     case 0:
+      setLed(state);
       stationary();
       state = 1;
       break;
 
     // Forward
     case 1:
+      setLed(state);
       roaming();
       break;
     
-    // Navigate all 90 deg turns (NOT USED)
+    // Turning method
     case 2:
-      navigateWall();
+      setLed(state); 
+      rightTwoLeft();
       break;
 
-    // navigate line
     case 3:
-      navigateLine();
-      break;
-
-    case 4:
-      navigateWall();
+      setLed(state);
+      lineAdjustAway();
       break;
   }
 }
