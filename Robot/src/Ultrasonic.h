@@ -3,3 +3,5 @@
 
 // defining get distance function
 int getDistance();
+
+bool distanceCheck();

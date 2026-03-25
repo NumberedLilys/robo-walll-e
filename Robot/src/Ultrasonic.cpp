@@ -28,3 +28,11 @@ int getDistance() {
   
   return validReading;
 }
+
+bool distanceCheck(){
+  if (getDistance() <= MIN_DISTANCE){
+    return true;
+  } else {
+    return false;
+  }
+}
