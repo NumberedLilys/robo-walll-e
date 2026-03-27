@@ -45,12 +45,22 @@ extern int turnCounter;
 extern int largeAngle;
 extern int distance;
 extern int state;
+
+// Line tracking variables instead of analog read
 extern int lineRValue;
 extern int lineCValue;
 extern int lineLValue;
+
+// Stop for specific conditions
 extern bool stopWall;
 extern bool stopLineWhite;
 extern bool stopLineBlack;
+
+// Specific functionality variable true if on
+extern bool trackingLineBlack;
+extern bool trackingLineWhite;
+extern bool trackingWall;
+extern bool trackingGyroAdjust;
 
 // ====== PROGRAM FUNCTIONS ======
 

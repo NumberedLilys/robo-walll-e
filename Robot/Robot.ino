@@ -20,6 +20,7 @@
  // Know if it has fallen over
  // Know if a sendor has been disconnected
  // Only detect one type of line or neither
+ // Being able to turn on or off specific capabilities
 
 #include "src//Behaviour.h"
 

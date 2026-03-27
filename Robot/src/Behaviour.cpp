@@ -82,13 +82,15 @@ void roaming(){
 
     // Checks for lines and adjusts if necessary
 
-    if (stopCenterCheck()){
-      state = 0;
-      break;
-    }
-    else if (anyOnLine()){
-      state = 3;
-      break;
+    if (trackingLineBlack || trackingLineWhite){
+      if (stopCenterCheck()){
+        state = 0;
+        break;
+      }
+      else if (anyOnLine()){
+        state = 3;
+        break;
+      }
     }
 
     // updateLineTrackers();
@@ -112,38 +114,43 @@ void roaming(){
 
     // Adjusts for drift (0.5 deg)
 
-    updateGyroAngle();
-    
-    // Adjust left
-    if (getAngle() > 0.5){
-      print("[LEFT] ");
-      moveMotors(SPEED_DRIFT, SPEED_NORMAL);
-    }
-    
-    // Adjust right
-    else if (getAngle() < -0.5){
-      print("[RIGT] ");
-      moveMotors(SPEED_NORMAL, SPEED_DRIFT);
-    }
+    if (trackingGyroAdjust){
+      updateGyroAngle();
+      
+      // Adjust left
+      if (getAngle() > 0.5){
+        print("[LEFT] ");
+        moveMotors(SPEED_DRIFT, SPEED_NORMAL);
+      }
+      
+      // Adjust right
+      else if (getAngle() < -0.5){
+        print("[RIGT] ");
+        moveMotors(SPEED_NORMAL, SPEED_DRIFT);
+      }
 
-    // Go forward
-    else{
-      print("[FRWD] ");
-      moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+      // Go forward
+      else{
+        print("[FRWD] ");
+        moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+      }
     }
 
     // ========= Ultrasonic ===========
 
-    // If near a wall, stop
-    flag = distanceCheck();
-    if (flag && stopWall){
-      state = 0;
-      break;
-    }
-    else if (flag && !stopWall){
-      moveMotors(0, 0);
-      state = 2;
-      break;
+    if (trackingWall){
+
+      // If near a wall, stop
+      flag = distanceCheck();
+      if (flag && stopWall){
+        state = 0;
+        break;
+      }
+      else if (flag && !stopWall){
+        moveMotors(0, 0);
+        state = 2;
+        break;
+      }
     }
   }
 }
