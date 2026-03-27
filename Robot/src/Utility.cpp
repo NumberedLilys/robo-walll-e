@@ -7,8 +7,9 @@ float gyroZOffset = 0;        // Calibration offset
 float currentAngle = 0;       // Current angle in degrees
 unsigned long lastTime = 0;   // Last read time
 CRGB leds[NUM_LEDS];          // Current LED Color values
-CRGB stateColors[] = {CRGB::Orange, CRGB::Blue, CRGB::Purple, CRGB::White}; // State colors in order
+CRGB stateColors[] = {CRGB::Green, CRGB::Blue, CRGB::Purple, CRGB::White}; // State colors in order
 Servo scanServo;              // Servo
+bool flag = false;
 int obCounter = 0;
 int turnCounter = 0;
 int largeAngle = false;
@@ -17,6 +18,10 @@ int state = 0;
 int lineRValue = 0;
 int lineCValue = 0;
 int lineLValue = 0;
+bool stopWall = 0;
+bool stopLineWhite = 0;
+bool stopLineBlack = 1;
+
 
 // Function to print all info for testing purposes
 void printInfo(){

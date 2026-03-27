@@ -30,7 +30,8 @@ int getDistance() {
 }
 
 bool distanceCheck(){
-  if (getDistance() <= MIN_DISTANCE){
+  distance = getDistance();
+  if (0 < distance && distance <= MIN_DISTANCE){
     return true;
   } else {
     return false;

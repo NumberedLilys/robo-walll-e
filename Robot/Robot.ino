@@ -14,6 +14,12 @@
  * 
  * I also switched the stater code MTR_L and MTR_R becease it is opposite to how I would preseve left and right (From behind)
  */
+ 
+ // Pan US sensor to detect things within a curain level of left and right
+ // Being able to follow a specific line
+ // Know if it has fallen over
+ // Know if a sendor has been disconnected
+ // Only detect one type of line or neither
 
 #include "src//Behaviour.h"
 

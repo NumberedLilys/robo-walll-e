@@ -15,3 +15,9 @@ void followLine();
 
 // A function that updates the global line tracker values to deduce the use of analogRead
 void updateLineTrackers();
+
+// Check for center line tracker for complete stop
+bool CenterCheck();
+
+// Double Check for center line tracker for complete stop
+bool stopCenterCheck();

@@ -39,6 +39,7 @@ extern unsigned long lastTime;       // Last read time
 extern CRGB leds[NUM_LEDS];          // Current LED Color values
 extern CRGB stateColors[];           // Array of colors
 extern Servo scanServo;              // Servo
+extern bool flag;
 extern int obCounter;              
 extern int turnCounter;
 extern int largeAngle;
@@ -47,6 +48,9 @@ extern int state;
 extern int lineRValue;
 extern int lineCValue;
 extern int lineLValue;
+extern bool stopWall;
+extern bool stopLineWhite;
+extern bool stopLineBlack;
 
 // ====== PROGRAM FUNCTIONS ======
 

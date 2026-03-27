@@ -46,6 +46,7 @@ void rotate(int targetAngle){
 
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary(){
+  moveMotors(0, 0);
 
   // Wait for button press
   while (digitalRead(BUTTON) == HIGH){}
@@ -76,13 +77,16 @@ void stationary(){
 void roaming(){
   moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   while (true){
+
     // ======== Line Tracking ========
 
     // Checks for lines and adjusts if necessary
 
-    updateLineTrackers();
-
-    if (anyOnLine()){
+    if (stopCenterCheck()){
+      state = 0;
+      break;
+    }
+    else if (anyOnLine()){
       state = 3;
       break;
     }
@@ -131,10 +135,12 @@ void roaming(){
     // ========= Ultrasonic ===========
 
     // If near a wall, stop
-
-    distance = getDistance();
-
-    if (0 < distance && distance < MIN_DISTANCE){
+    flag = distanceCheck();
+    if (flag && stopWall){
+      state = 0;
+      break;
+    }
+    else if (flag && !stopWall){
       moveMotors(0, 0);
       state = 2;
       break;
@@ -213,8 +219,7 @@ void rightTwoLeft(){
       rotate(-90);
 
       // instead, turn 180 if cannot go forward after turning left
-      distance = getDistance();
-      if (0 < distance && distance < MIN_DISTANCE){
+      if (distanceCheck()){
         rotate(180);
         turnCounter = 2;
       }

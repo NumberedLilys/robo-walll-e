@@ -56,3 +56,29 @@ void updateLineTrackers(){
   lineCValue = analogRead(LINE_C);
   lineLValue = analogRead(LINE_L);
 }
+
+// Check for center line tracker for complete stop
+bool CenterCheck(){
+  updateLineTrackers();
+  if ((lineCValue > LINE_THRESHOLD_BLACK) && (stopLineBlack)){
+    return true;
+  }
+
+  else if ((lineCValue < LINE_THRESHOLD_WHITE) && (stopLineWhite)){
+    return true;
+  }
+
+  else{
+    return false;
+  }
+}
+
+// Double Check for center line tracker for complete stop
+bool stopCenterCheck(){
+  if (CenterCheck() && CenterCheck()){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
