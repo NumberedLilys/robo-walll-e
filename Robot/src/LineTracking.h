@@ -53,7 +53,7 @@ void followLineThinBoth();
 // ========== Thick Line Tracking =============================================
 
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
-void followLineThickType(int threshold, bool type);
+void followLineThickType(int threshold, bool type = NULL);
 
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
 void followLineThickBoth();

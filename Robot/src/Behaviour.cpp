@@ -92,7 +92,7 @@ void navigateWall(){
       moveMotors(0, 0);
       setServoAngleSmooth(0);
       delay(500);
-      if (getDistance() > MIN_DISTANCE){
+      if (getDistance() > (MIN_DISTANCE*3)){
         obCounter = 0;
         centerServo();
         rotate(90);
@@ -105,7 +105,7 @@ void navigateWall(){
       obCounter++;
       setServoAngleSmooth(180);
       delay(500);
-      if (getDistance() > MIN_DISTANCE){
+      if (getDistance() > (MIN_DISTANCE*3)){
         obCounter = 0;
         centerServo();
         rotate(-90);

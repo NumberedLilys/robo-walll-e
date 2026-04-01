@@ -26,11 +26,11 @@
 #define SPEED_NORMAL 100
 #define SPEED_DRIFT 85
 #define SPEED_TURN 75
-#define SPEED_FOLLOW 65
+#define SPEED_FOLLOW 50
 #define LINE_THRESHOLD_BLACK 900
-#define LINE_THRESHOLD_WHITE 200
-#define MIN_DISTANCE 10
-#define INERTIA_ERROR 2       // Higher if on less frictiony surface (Higher number undershots the turn)
+#define LINE_THRESHOLD_WHITE 250
+#define MIN_DISTANCE 8
+#define INERTIA_ERROR 1       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading

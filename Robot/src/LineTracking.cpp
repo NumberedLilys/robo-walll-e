@@ -81,9 +81,16 @@ bool allTrackersOffLine(){
 // Function that determines what to do for line tracking
 void lineTrackingMode(){
 
+  updateLineTrackers();
+  moveMotors(0, 0);
+
   // *Needs to add the other if statesments for line adjust and stopping
   // *Need to make different varients to line adjust so it works with just white or black lines
-  if (turnLineBlack && trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0)){
+  if (allTrackersOffLine()){
+    state = 1;
+  }
+
+  else if (turnLineBlack && trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0)){
     turnOnLine();
   }
   
@@ -101,7 +108,7 @@ void lineTrackingMode(){
     }
 
     else{
-      state = 0;
+      state = 1;
     }
   // } else if (){
     
@@ -194,41 +201,44 @@ void followLineThinBoth(){
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
 void followLineThickType(int threshold, bool type){
 
-  // // Line of code to determine the type of tracking (1 for white means true if on line)
-  // if ((type == NULL) && (threshold == LINE_THRESHOLD_WHITE)){
-  //   type = 1;
-  // }else{
-  //   type = 0;
-  // }
+  // Line of code to determine the type of tracking (1 for white means true if on line)
+  if ((type == NULL) && (threshold == LINE_THRESHOLD_WHITE)){
+    type = 1;
+  }else{
+    type = 0;
+  }
+
+  moveMotors(SPEED_FOLLOW, SPEED_FOLLOW);
 
   while (true){
     // Go the line following speed
-    moveMotors(SPEED_FOLLOW, SPEED_FOLLOW);
+    updateLineTrackers();
 
     // If all line trackers off of lines, go back to roaming
     if (allTrackersDetectLine(threshold, !type)){
-      state = 0;
+      state = 4;
       break;
     }
 
     // If left tracker off line, adjust to the right
     else if (trackerDetectLine(lineLValue, threshold, !type)){
-      moveMotors(0, 0);
-      rotate(1);
+      moveMotors(SPEED_TURN, 0);
     }
 
     // If right tracker off line, adjust to the left
     else if (trackerDetectLine(lineRValue, threshold, !type)){
-      moveMotors(0, 0);
-      rotate(-1);
+      moveMotors(0, SPEED_TURN);
     }
 
-    // // If only the center tracker is on the line, switch to thin line tracking
-    // else if (trackerDetectLine(lineCValue, threshold, type)
-    //       && trackerDetectLine(lineRValue, threshold, !type)
-    //       && trackerDetectLine(lineLValue, threshold, !type)){
-    //         followLineThinType(threshold, type);
-    //       }
+    // If only the center tracker is on the line, switch to thin line tracking
+    else if (trackerDetectLine(lineCValue, threshold, type)
+          && trackerDetectLine(lineRValue, threshold, !type)
+          && trackerDetectLine(lineLValue, threshold, !type)){
+            followLineThinType(threshold, type);
+          }
+    else{
+      moveMotors(SPEED_FOLLOW, SPEED_FOLLOW);
+    }
   }
 }
 
@@ -264,10 +274,13 @@ void followLineThickBoth(){
 // ========== Turn line tracking functions ====================================
 
 void turnOnLine(){
-  moveMotors(-SPEED_TURN, SPEED_TURN);
-  if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1)){
-    moveMotors(0, 0);
-    state = 4;
+  while (true){
+    updateLineTrackers();
+    moveMotors(-SPEED_TURN, SPEED_TURN);
+    if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1)){
+      moveMotors(0, 0);
+      state = 4;
+    }
   }
 }
 
