@@ -26,6 +26,7 @@
 #define SPEED_NORMAL 100
 #define SPEED_DRIFT 85
 #define SPEED_TURN 75
+#define SPEED_FOLLOW 65
 #define LINE_THRESHOLD_BLACK 900
 #define LINE_THRESHOLD_WHITE 200
 #define MIN_DISTANCE 20
@@ -61,6 +62,10 @@ extern bool trackingLineBlack;
 extern bool trackingLineWhite;
 extern bool trackingWall;
 extern bool trackingGyroAdjust;
+
+// Being able to follow different types of lines
+extern bool followLineWhite;
+extern bool followLineBlack;
 
 // ====== PROGRAM FUNCTIONS ======
 

@@ -1,5 +1,4 @@
 #include "Utility.h"
-#include "Ultrasonic.h"
 
 // ====== PROGRAM VARIABLES ======
 int16_t gyroZ;                // Raw gyro Z-axis reading
@@ -32,6 +31,10 @@ bool trackingLineWhite = 1;
 bool trackingWall = 1;
 bool trackingGyroAdjust = 1;
 
+// Being able to follow different types of lines
+bool followLineWhite = 1;
+bool followLineBlack = 1;
+
 
 
 // Function to print all info for testing purposes
@@ -44,6 +47,5 @@ void printInfo(){
     print(" | ");
     println(analogRead(LINE_R));
     print("[DISTANCE] ");
-    println(getDistance());
-    delay(150);
+    println(distance);
 }

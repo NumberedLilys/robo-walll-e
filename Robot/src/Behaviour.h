@@ -6,9 +6,6 @@
 #include "Servo.h"
 #include "Ultrasonic.h"
 
-// Function to turn a set amount of degrees
-void rotate(int targetAngle);
-
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary();
 
@@ -23,3 +20,6 @@ void rightTwoLeft();
 
 // A function that Checks for lines and adjusts if necessary
 void lineAdjustAway();
+
+// A function that will determine which direction to go when at a line crossroad
+void crossroads();

@@ -1,49 +1,5 @@
 #include "Behaviour.h"
 
-// Function to turn a set amount of degrees
-void rotate(int targetAngle){
-
-  // If angle is 180 or -180, rotate 90 or -90 twice
-  if (targetAngle == 180 || targetAngle == -180){
-    largeAngle = true;
-    rotate(targetAngle/2);
-    rotate(targetAngle/2);
-    resetAngle();
-  }else{
-
-    // Reset the angle at the beginning for accuracy
-    resetAngle();
-
-    while (true){
-      updateGyroAngle();
-
-      // If the target is left, turn left until reaching the target angle
-      if (targetAngle < 0){
-        moveMotors(-SPEED_TURN, SPEED_TURN);
-        if (getAngle() <= targetAngle + INERTIA_ERROR){
-          moveMotors(0, 0);
-          break;
-        }
-      }
-      
-      // If the target is right, turn right until reaching the target angle
-      else{
-        moveMotors(SPEED_TURN, -SPEED_TURN);
-        if (getAngle() >= targetAngle - INERTIA_ERROR){
-          moveMotors(0, 0);
-          break;
-        }
-      }
-    }
-
-    // Reset angle back to zero for accuracy
-    if (!largeAngle){
-      resetAngle();
-    }
-  }
-  largeAngle = false;
-}
-
 // Function that makes the robot wait until a button is pressed before moving into the nest stage of operation
 void stationary(){
   moveMotors(0, 0);
@@ -59,20 +15,6 @@ void stationary(){
 
 }
 
-// void followLine(){
-//   if (offLine(1)){
-//     moveMotors(SPEED_TURN, SPEED_NORMAL);
-//   } else if (offLine(2)){
-//     moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-//   } else if (offLine(3)){
-//     moveMotors(SPEED_NORMAL, SPEED_TURN);
-//   } else if (allOffLine()){
-//     state = 1;
-//   } else {
-//     moveMotors(-50, -50);
-//   }
-// }
-
 // A function that runs the default state of the robot
 void roaming(){
   moveMotors(SPEED_NORMAL, SPEED_NORMAL);
@@ -87,28 +29,11 @@ void roaming(){
         state = 0;
         break;
       }
-      else if (anyOnLine()){
+      else if (anyTrackersOnLine()){
         state = 3;
         break;
       }
     }
-
-    // updateLineTrackers();
-    // if (!offLine(2)){
-    //   moveMotors(0, 0);
-    //   state = 2;
-    //   break;
-    // }
-    // else if (!offLine(1) || !offLine(3)){
-    //   moveMotors(0, 0);
-    //   if (!offLine(1)){
-    //     rotate(1);
-    //   }
-    //   else{
-    //     rotate(-1);
-    //   }
-    //   break;
-    // }
 
     // ======== Gyro Tracking ========
 
@@ -245,7 +170,7 @@ void lineAdjustAway(){
   moveMotors(0, 0);
 
   // Center Line sensor
-  if (!offLine(2)){ // if center is on the line, call right two left and go backward for a little bit
+  if (trackerOnLine(lineCValue)){ // if center is on the line, call right two left and go backward for a little bit
     rightTwoLeft();
     moveMotors(-50, -50);
     delay(300);
@@ -253,12 +178,12 @@ void lineAdjustAway(){
   }
 
   // Left Line Sensor
-  else if (!offLine(1)){ // if left is on the line, adjust right
+  else if (trackerOnLine(lineLValue)){ // if left is on the line, adjust right
     rotate(2);
   }
 
   // Right Line sensor
-  else if (!offLine(3)){ // if right is on the line, adjust left
+  else if (trackerOnLine(lineRValue)){ // if right is on the line, adjust left
     rotate(-2);
   }
 
@@ -269,5 +194,10 @@ void lineAdjustAway(){
 
   // Update sensors at the end for the next loop
   updateLineTrackers();
+
+}
+
+// A function that will determine which direction to go when at a line crossroad
+void crossroads(){
 
 }

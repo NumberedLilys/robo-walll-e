@@ -20,7 +20,6 @@
  // Know if it has fallen over
  // Know if a sendor has been disconnected
  // Only detect one type of line or neither
- // Being able to turn on or off specific capabilities
 
 #include "src//Behaviour.h"
 
@@ -88,21 +87,34 @@ void loop() {
       state = 1;
       break;
 
-    // Forward
+    // Main roaming state that determines functionality
     case 1:
       setLed(state);
       roaming();
       break;
     
-    // Turning method
+    // Turning method R2L
     case 2:
       setLed(state); 
       rightTwoLeft();
       break;
-
+    
+    // Line Adjusting for line avoidance
     case 3:
       setLed(state);
       lineAdjustAway();
+      break;
+    
+    // Line tracking for following a line
+    case 4:
+      setLed(state);
+      lineTrackingMode();
+      break;
+
+    // Thin line tracking crossroads case
+    case 5:
+      setLed(state);
+      crossroads();
       break;
   }
 }
