@@ -6,7 +6,7 @@ float gyroZOffset = 0;        // Calibration offset
 float currentAngle = 0;       // Current angle in degrees
 unsigned long lastTime = 0;   // Last read time
 CRGB leds[NUM_LEDS];          // Current LED Color values
-CRGB stateColors[] = {CRGB::Green, CRGB::Blue, CRGB::Purple, CRGB::White}; // State colors in order
+CRGB stateColors[] = {CRGB::Green, CRGB::Blue, CRGB::Purple, CRGB::White, CRGB::Pink, CRGB::Violet}; // State colors in order
 Servo scanServo;              // Servo
 bool flag = false;
 int obCounter = 0;

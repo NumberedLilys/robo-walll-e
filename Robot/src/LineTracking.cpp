@@ -83,8 +83,8 @@ void lineTrackingMode(){
 
   // *Needs to add the other if statesments for line adjust and stopping
   // *Need to make different varients to line adjust so it works with just white or black lines
-  if (stopLineBlack || stopLineWhite){
-
+  if (turnLineBlack && trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0)){
+    turnOnLine();
   }
   
   else if ((followLineBlack || followLineWhite)){
@@ -113,16 +113,18 @@ void followingLineBlack(){
   if (trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0)){
     followLineThinType(LINE_THRESHOLD_BLACK);
   } else{
-    followLineThickType(LINE_THRESHOLD_BLACK);
+    followLineThickType(LINE_THRESHOLD_BLACK, 1);
   }
 }
 
 // Function that follows white lines only
 void followingLineWhite(){
-  if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1)){
+  if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1) &&
+      trackerDetectLine(lineLValue, LINE_THRESHOLD_WHITE, 0) &&
+      trackerDetectLine(lineRValue, LINE_THRESHOLD_WHITE, 0)){
     followLineThinType(LINE_THRESHOLD_WHITE);
   } else{
-    followLineThickType(LINE_THRESHOLD_WHITE);
+    followLineThickType(LINE_THRESHOLD_WHITE, 1);
   }
 }
 
@@ -192,37 +194,42 @@ void followLineThinBoth(){
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
 void followLineThickType(int threshold, bool type){
 
-  // Line of code to determine the type of tracking (1 for white means true if on line)
-  if ((type == NULL) && (threshold == LINE_THRESHOLD_WHITE)){
-    type = 1;
-  }else{
-    type = 0;
+  // // Line of code to determine the type of tracking (1 for white means true if on line)
+  // if ((type == NULL) && (threshold == LINE_THRESHOLD_WHITE)){
+  //   type = 1;
+  // }else{
+  //   type = 0;
+  // }
+
+  while (true){
+    // Go the line following speed
+    moveMotors(SPEED_FOLLOW, SPEED_FOLLOW);
+
+    // If all line trackers off of lines, go back to roaming
+    if (allTrackersDetectLine(threshold, !type)){
+      state = 0;
+      break;
+    }
+
+    // If left tracker off line, adjust to the right
+    else if (trackerDetectLine(lineLValue, threshold, !type)){
+      moveMotors(0, 0);
+      rotate(1);
+    }
+
+    // If right tracker off line, adjust to the left
+    else if (trackerDetectLine(lineRValue, threshold, !type)){
+      moveMotors(0, 0);
+      rotate(-1);
+    }
+
+    // // If only the center tracker is on the line, switch to thin line tracking
+    // else if (trackerDetectLine(lineCValue, threshold, type)
+    //       && trackerDetectLine(lineRValue, threshold, !type)
+    //       && trackerDetectLine(lineLValue, threshold, !type)){
+    //         followLineThinType(threshold, type);
+    //       }
   }
-
-  // Go the line following speed
-  moveMotors(SPEED_FOLLOW, SPEED_FOLLOW);
-
-  // If all line trackers off of lines, go back to roaming
-  if (allTrackersDetectLine(threshold, !type)){
-    state = 1;
-  }
-
-  // If left tracker off line, adjust to the right
-  else if (trackerDetectLine(lineLValue, threshold, !type)){
-    rotate(1);
-  }
-
-  // If right tracker off line, adjust to the left
-  else if (trackerDetectLine(lineRValue, threshold, !type)){
-    rotate(-1);
-  }
-
-  // If only the center tracker is on the line, switch to thin line tracking
-  else if (trackerDetectLine(lineCValue, threshold, type)
-        && trackerDetectLine(lineRValue, threshold, !type)
-        && trackerDetectLine(lineLValue, threshold, !type)){
-          followLineThinType(threshold, type);
-        }
 }
 
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
@@ -252,6 +259,16 @@ void followLineThickBoth(){
         && trackerOffLine(lineLValue)){
           followLineThinBoth();
         }
+}
+
+// ========== Turn line tracking functions ====================================
+
+void turnOnLine(){
+  moveMotors(-SPEED_TURN, SPEED_TURN);
+  if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1)){
+    moveMotors(0, 0);
+    state = 4;
+  }
 }
 
 // ========== Other Line Tracking Functions ===================================

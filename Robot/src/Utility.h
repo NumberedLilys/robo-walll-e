@@ -29,7 +29,7 @@
 #define SPEED_FOLLOW 65
 #define LINE_THRESHOLD_BLACK 900
 #define LINE_THRESHOLD_WHITE 200
-#define MIN_DISTANCE 20
+#define MIN_DISTANCE 10
 #define INERTIA_ERROR 2       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======

@@ -96,7 +96,8 @@ void loop() {
     // Turning method R2L
     case 2:
       setLed(state); 
-      rightTwoLeft();
+      // rightTwoLeft();
+      navigateWall();
       break;
     
     // Line Adjusting for line avoidance

@@ -30,7 +30,7 @@ void roaming(){
         break;
       }
       else if (anyTrackersOnLine()){
-        state = 3;
+        state = 4;
         break;
       }
     }
