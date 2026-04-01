@@ -33,7 +33,10 @@ bool trackingGyroAdjust = 1;
 
 // Being able to follow different types of lines
 bool followLineWhite = 1;
-bool followLineBlack = 1;
+bool followLineBlack = 0;
+
+// Being able to turn when detect a line
+bool turnLineBlack = 1;
 
 
 

@@ -67,6 +67,9 @@ extern bool trackingGyroAdjust;
 extern bool followLineWhite;
 extern bool followLineBlack;
 
+// Being able to turn when detect a line
+extern bool turnLineBlack;
+
 // ====== PROGRAM FUNCTIONS ======
 
 // Function to print all info for testing purposes
