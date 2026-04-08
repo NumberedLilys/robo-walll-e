@@ -52,10 +52,7 @@ extern int lineRValue;
 extern int lineCValue;
 extern int lineLValue;
 
-// Stop for specific conditions
-extern bool stopWall;
-extern bool stopLineWhite;
-extern bool stopLineBlack;
+// ============ Adjustable functionality ======================================
 
 // Specific functionality variable true if on
 extern bool trackingLineBlack;
@@ -63,12 +60,28 @@ extern bool trackingLineWhite;
 extern bool trackingWall;
 extern bool trackingGyroAdjust;
 
+// ============ Wall tracking functionality ===================================
+
+// Stop for specific conditions
+extern bool stopWall;
+
+// ============ Line tracking functionality ===================================
+
+// Stop for specific conditions
+extern bool stopLineWhite;
+extern bool stopLineBlack;
+
 // Being able to follow different types of lines
 extern bool followLineWhite;
 extern bool followLineBlack;
 
 // Being able to turn when detect a line
+extern bool turnLineWhite;
 extern bool turnLineBlack;
+
+// Being able to adjust when detect a line
+extern bool adjustLineWhite;
+extern bool adjustLineBlack;
 
 // ====== PROGRAM FUNCTIONS ======
 

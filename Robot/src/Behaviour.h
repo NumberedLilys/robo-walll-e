@@ -18,8 +18,8 @@ void navigateWall();
 // Function that turns right twice and then left
 void rightTwoLeft();
 
-// A function that Checks for lines and adjusts if necessary
-void lineAdjustAway();
+// Function to check which line to follow
+void lineTrackingMode();
 
 // A function that will determine which direction to go when at a line crossroad
 void crossroads();

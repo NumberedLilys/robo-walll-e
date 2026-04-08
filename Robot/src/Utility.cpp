@@ -20,10 +20,7 @@ int lineRValue = 0;
 int lineCValue = 0;
 int lineLValue = 0;
 
-// Stop for specific conditions
-bool stopWall = 0;
-bool stopLineWhite = 0;
-bool stopLineBlack = 0;
+// ============ Adjustable functionality ======================================
 
 // Specific functionality variable true if on
 bool trackingLineBlack = 1;
@@ -31,13 +28,28 @@ bool trackingLineWhite = 1;
 bool trackingWall = 1;
 bool trackingGyroAdjust = 1;
 
+// ============ Wall tracking functionality ===================================
+
+// Stop for specific conditions
+bool stopWall = 0;
+
+// ============ Line tracking functionality ===================================
+
+// Stop for specific conditions
+bool stopLineWhite = 0;
+bool stopLineBlack = 0;
+
 // Being able to follow different types of lines
-bool followLineWhite = 1;
+bool followLineWhite = 0;
 bool followLineBlack = 0;
 
 // Being able to turn when detect a line
-bool turnLineBlack = 1;
+bool turnLineWhite = 0;
+bool turnLineBlack = 0;
 
+// Being able to adjust when detect a line
+bool adjustLineWhite = 0;
+bool adjustLineBlack = 0;
 
 
 // Function to print all info for testing purposes

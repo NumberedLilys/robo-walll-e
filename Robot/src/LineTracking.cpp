@@ -78,43 +78,6 @@ bool allTrackersOffLine(){
 
 // ========== Line Following Functions ========================================
 
-// Function that determines what to do for line tracking
-void lineTrackingMode(){
-
-  updateLineTrackers();
-  moveMotors(0, 0);
-
-  // *Needs to add the other if statesments for line adjust and stopping
-  // *Need to make different varients to line adjust so it works with just white or black lines
-  if (allTrackersOffLine()){
-    state = 1;
-  }
-
-  else if (turnLineBlack && trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0)){
-    turnOnLine();
-  }
-  
-  else if ((followLineBlack || followLineWhite)){
-    if ((followLineWhite && trackingLineWhite) && (!followLineBlack || !trackingLineBlack) && !stopLineWhite){
-      followingLineWhite();
-    }
-
-    else if ((followLineBlack && trackingLineBlack) && (!followLineWhite || !trackingLineWhite) && !stopLineBlack){
-      followingLineBlack();
-    }
-
-    else if ((trackingLineBlack && trackingLineWhite) && (followLineBlack && followLineWhite) && (!stopLineBlack && !stopLineWhite)){
-      followingLineBoth();
-    }
-
-    else{
-      state = 1;
-    }
-  // } else if (){
-    
-  }
-}
-
 // Function that follows black lines only
 void followingLineBlack(){
   if (trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0)){
@@ -163,7 +126,7 @@ void followLineThinType(int threshold, bool type){
   }
 
   else if (allTrackersDetectLine(threshold, type)){
-    state = 5;
+    state = 4;
   }
 
   else if (trackerDetectLine(lineLValue, threshold, type)){
@@ -184,7 +147,7 @@ void followLineThinBoth(){
   }
 
   else if (!allTrackersOffLine()){
-    state = 5;
+    state = 4;
   }
 
   else if (trackerOnLine(lineLValue)){
@@ -216,7 +179,7 @@ void followLineThickType(int threshold, bool type){
 
     // If all line trackers off of lines, go back to roaming
     if (allTrackersDetectLine(threshold, !type)){
-      state = 4;
+      state = 3;
       break;
     }
 
@@ -273,15 +236,74 @@ void followLineThickBoth(){
 
 // ========== Turn line tracking functions ====================================
 
+// A function that turns on a specific line
 void turnOnLine(){
-  while (true){
-    updateLineTrackers();
-    moveMotors(-SPEED_TURN, SPEED_TURN);
-    if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1)){
-      moveMotors(0, 0);
-      state = 4;
-    }
+  rotate(180);
+  state = 1;
+}
+
+// ============ Adjust line tracking functions ================================
+
+// A function that Checks for lines and adjusts if necessary
+void lineAdjustType(int threshold, bool type){
+
+  // Stop when a line is detected
+  moveMotors(0, 0);
+
+  // Update the line trackers
+  updateLineTrackers();
+
+  // Center Line sensor
+  if (trackerDetectLine(lineCValue, threshold, type)){ // if center is on the line, call right two left and go backward for a little bit
+    rightTwoLeft();
+    moveMotors(-50, -50);
+    delay(300);
+    moveMotors(0, 0);
   }
+
+  // Left Line Sensor
+  else if (trackerDetectLine(lineLValue, threshold, type)){ // if left is on the line, adjust right
+    rotate(2);
+  }
+
+  // Right Line sensor
+  else if (trackerDetectLine(lineRValue, threshold, type)){ // if right is on the line, adjust left
+    rotate(-2);
+  }
+
+  // If not on a line, go to roaming
+  state = 1;
+}
+
+// A function that Checks for lines and adjusts if necessary
+void lineAdjustBoth(){
+
+  // Stop when a line is detected
+  moveMotors(0, 0);
+
+  // Update the line trackers
+  updateLineTrackers();
+
+  // Center Line sensor
+  if (trackerOnLine(lineCValue)){ // if center is on the line, call right two left and go backward for a little bit
+    rightTwoLeft();
+    moveMotors(-50, -50);
+    delay(300);
+    moveMotors(0, 0);
+  }
+
+  // Left Line Sensor
+  else if (trackerOnLine(lineLValue)){ // if left is on the line, adjust right
+    rotate(2);
+  }
+
+  // Right Line sensor
+  else if (trackerOnLine(lineRValue)){ // if right is on the line, adjust left
+    rotate(-2);
+  }
+
+  // If not on a line, go to roaming
+  state = 1;
 }
 
 // ========== Other Line Tracking Functions ===================================

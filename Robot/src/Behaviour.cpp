@@ -25,12 +25,8 @@ void roaming(){
     // Checks for lines and adjusts if necessary
 
     if (trackingLineBlack || trackingLineWhite){
-      if (stopCenterCheck()){
-        state = 0;
-        break;
-      }
-      else if (anyTrackersOnLine()){
-        state = 4;
+      if (anyTrackersOnLine()){
+        state = 3;
         break;
       }
     }
@@ -163,38 +159,65 @@ void rightTwoLeft(){
   state = 1;
 }
 
-// A function that Checks for lines and adjusts if necessary
-void lineAdjustAway(){
+// Function that determines what to do for line tracking
+void lineTrackingMode(){
 
-  // Stop when a line is detected
+  updateLineTrackers();
   moveMotors(0, 0);
 
-  // Center Line sensor
-  if (trackerOnLine(lineCValue)){ // if center is on the line, call right two left and go backward for a little bit
-    rightTwoLeft();
-    moveMotors(-50, -50);
-    delay(300);
-    moveMotors(0, 0);
-  }
+  // *Needs to add the other if statesments for line adjust and stopping
+  // *Need to make different varients to line adjust so it works with just white or black lines
 
-  // Left Line Sensor
-  else if (trackerOnLine(lineLValue)){ // if left is on the line, adjust right
-    rotate(2);
-  }
-
-  // Right Line sensor
-  else if (trackerOnLine(lineRValue)){ // if right is on the line, adjust left
-    rotate(-2);
-  }
-
-  // If not on a line, go to roaming
-  else{
+  // If not on a line, go back to roaming
+  if (allTrackersOffLine()){
     state = 1;
   }
 
-  // Update sensors at the end for the next loop
-  updateLineTrackers();
+  // If on a line to stop, go to stationary
+  else if (stopCenterCheck()){
+    state = 0;
+  }
 
+  // ========== Turn on line modes ============================================
+
+  // If center is on black line and turnLineBlack is true, turnOnLine
+  else if (turnLineBlack && trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0) && trackingLineBlack){
+    turnOnLine();
+  }
+
+  // If center is on white line and turnLineWhite is true, turnOnLine
+  else if (turnLineWhite && trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1) && trackingLineWhite){
+    turnOnLine();
+  }
+
+  // ========== Adjust line modes =============================================
+
+  // If on a white line and adjust on white line, adjust
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 1) && adjustLineWhite && trackingLineWhite){
+    lineAdjustType(LINE_THRESHOLD_WHITE, 1);
+  }
+
+  // If on a black line and adjust on black line, adjust
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0) && adjustLineBlack && trackingLineBlack){
+    lineAdjustType(LINE_THRESHOLD_BLACK, 0);
+  }
+  
+  // ========== Follow line modes =============================================
+
+  // If any on white and we are only following white, start following white
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 1) && (followLineWhite && trackingLineWhite) && (!followLineBlack || !trackingLineBlack) && !stopLineWhite){
+    followingLineWhite();
+  }
+
+  // If any on Black and we are only following black, start following black
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0) && (followLineBlack && trackingLineBlack) && (!followLineWhite || !trackingLineWhite) && !stopLineBlack){
+    followingLineBlack();
+  }
+
+  // If we are following both and on a line, start following both
+  else if (anyTrackersOnLine() && (trackingLineBlack && trackingLineWhite) && (followLineBlack && followLineWhite) && (!stopLineBlack && !stopLineWhite)){
+    followingLineBoth();
+  }
 }
 
 // A function that will determine which direction to go when at a line crossroad

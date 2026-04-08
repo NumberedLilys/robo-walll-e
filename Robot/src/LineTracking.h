@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility.h"
 #include "Motors.h"
+#include "Behaviour.h"
 
 // ========== Foundational Line Tracking Functions ============================
 
@@ -29,9 +30,6 @@ bool anyTrackersOnLine();
 bool allTrackersOffLine();
 
 // ========== Line Following Functions ========================================
-
-// Function to check which line to follow
-void lineTrackingMode();
 
 // Function that follows black lines only
 void followingLineBlack();
@@ -62,6 +60,14 @@ void followLineThickBoth();
 // ========== Turn line tracking functions ====================================
 
 void turnOnLine();
+
+// ============ Adjust line tracking functions ================================
+
+// A function that Checks for a specific line and adjusts if necessary
+void lineAdjustType(int threshold, bool type);
+
+// A function that Checks for lines and adjusts if necessary
+void lineAdjustBoth();
 
 // ========== Other Line Tracking Functions ===================================
 

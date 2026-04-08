@@ -100,20 +100,14 @@ void loop() {
       navigateWall();
       break;
     
-    // Line Adjusting for line avoidance
-    case 3:
-      setLed(state);
-      lineAdjustAway();
-      break;
-    
     // Line tracking for following a line
-    case 4:
+    case 3: 
       setLed(state);
       lineTrackingMode();
       break;
 
     // Thin line tracking crossroads case
-    case 5:
+    case 4:
       setLed(state);
       crossroads();
       break;
