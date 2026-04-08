@@ -21,5 +21,7 @@ void rightTwoLeft();
 // Function to check which line to follow
 void lineTrackingMode();
 
-// A function that will determine which direction to go when at a line crossroad
-void crossroads();
+// A fucntion that determines if it has crossed the finish line or not
+void finished();
+
+void doJig();

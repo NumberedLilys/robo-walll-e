@@ -41,6 +41,7 @@ extern CRGB leds[NUM_LEDS];          // Current LED Color values
 extern CRGB stateColors[];           // Array of colors
 extern Servo scanServo;              // Servo
 extern bool flag;
+extern int blackLineCounter;
 extern int obCounter;              
 extern int turnCounter;
 extern int largeAngle;

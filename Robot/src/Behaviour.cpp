@@ -23,8 +23,9 @@ void roaming(){
     // ======== Line Tracking ========
 
     // Checks for lines and adjusts if necessary
-
+    
     if (trackingLineBlack || trackingLineWhite){
+      updateLineTrackers();
       if (anyTrackersOnLine()){
         state = 3;
         break;
@@ -173,6 +174,11 @@ void lineTrackingMode(){
     state = 1;
   }
 
+  // Check to see if on black line
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
+    finished();
+  }
+
   // If on a line to stop, go to stationary
   else if (stopCenterCheck()){
     state = 0;
@@ -205,22 +211,37 @@ void lineTrackingMode(){
   // ========== Follow line modes =============================================
 
   // If any on white and we are only following white, start following white
-  else if (anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 1) && (followLineWhite && trackingLineWhite) && (!followLineBlack || !trackingLineBlack) && !stopLineWhite){
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 1) && (followLineWhite && trackingLineWhite) && !stopLineWhite){
     followingLineWhite();
   }
 
   // If any on Black and we are only following black, start following black
-  else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0) && (followLineBlack && trackingLineBlack) && (!followLineWhite || !trackingLineWhite) && !stopLineBlack){
+  else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0) && (followLineBlack && trackingLineBlack) && !stopLineBlack){
     followingLineBlack();
-  }
-
-  // If we are following both and on a line, start following both
-  else if (anyTrackersOnLine() && (trackingLineBlack && trackingLineWhite) && (followLineBlack && followLineWhite) && (!stopLineBlack && !stopLineWhite)){
-    followingLineBoth();
   }
 }
 
-// A function that will determine which direction to go when at a line crossroad
-void crossroads(){
+// A fucntion that determines if it has crossed the finish line or not
+void finished(){
+  if ((blackLineCounter < 1)){
+    blackLineCounter++;
+    rotate(180);
+    updateLineTrackers();
+    while (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
+      updateLineTrackers();
+      moveMotors(SPEED_NORMAL, SPEED_NORMAL);
+    }
+    state = 1;
+  }
 
+  else if (blackLineCounter >= 1){
+    doJig();
+    state = 0;
+  }
+}
+
+void doJig(){
+  moveMotors(150, -150);
+  delay(5000);
+  moveMotors(0, 0);
 }

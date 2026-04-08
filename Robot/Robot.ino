@@ -16,10 +16,10 @@
  */
  
  // Pan US sensor to detect things within a curain level of left and right
- // Being able to follow a specific line
  // Know if it has fallen over
- // Know if a sendor has been disconnected
- // Only detect one type of line or neither
+ // Know if a sensor has been disconnected
+
+ // know when in a loop, maybe when turns right 4 times, have a counter, if counter == 2 on the forth turn do a 180.
 
 #include "src//Behaviour.h"
 
@@ -104,12 +104,6 @@ void loop() {
     case 3: 
       setLed(state);
       lineTrackingMode();
-      break;
-
-    // Thin line tracking crossroads case
-    case 4:
-      setLed(state);
-      crossroads();
       break;
   }
 }

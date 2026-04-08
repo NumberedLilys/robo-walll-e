@@ -43,19 +43,12 @@ void followingLineBoth();
 // ========== Thin Line Tracking ==============================================
 
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
-void followLineThinType(int threshold, bool type = NULL);
-
-// A function that goes forward and adjusts until it detects all sensors off and decided which way to go
-void followLineThinBoth();
+void followLineThinType(int threshold, bool type);
 
 // ========== Thick Line Tracking =============================================
 
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
-void followLineThickType(int threshold, bool type = NULL);
-
-// A function that goes forward and adjusts until it detects all sensors off and decided which way to go
-void followLineThickBoth();
-
+void followLineThickType(int threshold, bool type);
 
 // ========== Turn line tracking functions ====================================
 
@@ -65,9 +58,6 @@ void turnOnLine();
 
 // A function that Checks for a specific line and adjusts if necessary
 void lineAdjustType(int threshold, bool type);
-
-// A function that Checks for lines and adjusts if necessary
-void lineAdjustBoth();
 
 // ========== Other Line Tracking Functions ===================================
 

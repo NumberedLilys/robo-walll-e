@@ -9,6 +9,7 @@ CRGB leds[NUM_LEDS];          // Current LED Color values
 CRGB stateColors[] = {CRGB::Green, CRGB::Blue, CRGB::Purple, CRGB::White, CRGB::Pink, CRGB::Violet}; // State colors in order
 Servo scanServo;              // Servo
 bool flag = false;
+int blackLineCounter = 0;
 int obCounter = 0;
 int turnCounter = 0;
 int largeAngle = false;
@@ -40,7 +41,7 @@ bool stopLineWhite = 0;
 bool stopLineBlack = 0;
 
 // Being able to follow different types of lines
-bool followLineWhite = 0;
+bool followLineWhite = 1;
 bool followLineBlack = 0;
 
 // Being able to turn when detect a line
