@@ -70,7 +70,7 @@ bool anyTrackersOnLine(){
 
 // A function that detects if all trackers are off a line
 bool allTrackersOffLine(){
-  if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 1) && anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 0)){
+  if (allTrackersDetectLine(LINE_THRESHOLD_BLACK, 1) && allTrackersDetectLine(LINE_THRESHOLD_WHITE, 0)){
     return true;
   }
   return false;
@@ -89,13 +89,14 @@ void followingLineBlack(){
 
 // Function that follows white lines only
 void followingLineWhite(){
-  if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1) &&
-      trackerDetectLine(lineLValue, LINE_THRESHOLD_WHITE, 0) &&
-      trackerDetectLine(lineRValue, LINE_THRESHOLD_WHITE, 0)){
-    followLineThinType(LINE_THRESHOLD_WHITE, 1);
-  } else{
-    followLineThickType(LINE_THRESHOLD_WHITE, 1);
-  }
+  // if (trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1) &&
+  //     trackerDetectLine(lineLValue, LINE_THRESHOLD_WHITE, 0) &&
+  //     trackerDetectLine(lineRValue, LINE_THRESHOLD_WHITE, 0)){
+  //   followLineThinType(LINE_THRESHOLD_WHITE, 1);
+  // } else{
+  //   followLineThickType(LINE_THRESHOLD_WHITE, 1);
+  // }
+  followLineThickType(LINE_THRESHOLD_WHITE, 1);
 }
 
 // ========== Thin Line Tracking ==============================================
@@ -103,17 +104,11 @@ void followingLineWhite(){
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
 void followLineThinType(int threshold, bool type){
 
-  // Line of code to determine the type of tracking (1 for white means true if on line)
-  if ((type == NULL) && (threshold == LINE_THRESHOLD_WHITE)){
-    type = 1;
-  }else{
-    type = 0;
-  }
-
   moveMotors(SPEED_FOLLOW, SPEED_FOLLOW);
 
   if (allTrackersDetectLine(threshold, !type)){
     state = 1;
+    resetAngle();
   }
 
   else if (trackerDetectLine(lineLValue, threshold, type)){
@@ -142,21 +137,21 @@ void followLineThickType(int threshold, bool type){
       break;
     }
 
-    // If only the center tracker is on the line, switch to thin line tracking
-    else if (trackerDetectLine(lineCValue, threshold, type)
-          && trackerDetectLine(lineRValue, threshold, !type)
-          && trackerDetectLine(lineLValue, threshold, !type)){
-            followLineThinType(threshold, type);
-    }
+    // // If only the center tracker is on the line, switch to thin line tracking
+    // else if (trackerDetectLine(lineCValue, threshold, type)
+    //       && trackerDetectLine(lineRValue, threshold, !type)
+    //       && trackerDetectLine(lineLValue, threshold, !type)){
+    //         followLineThinType(threshold, type);
+    // }
 
     // If left tracker off line, adjust to the right
     else if (trackerDetectLine(lineLValue, threshold, !type)){
-      moveMotors(SPEED_TURN, 0);
+      moveMotors(SPEED_TURN, -SPEED_TURN);
     }
 
     // If right tracker off line, adjust to the left
     else if (trackerDetectLine(lineRValue, threshold, !type)){
-      moveMotors(0, SPEED_TURN);
+      moveMotors(-SPEED_TURN, SPEED_TURN);
     }
 
     else{

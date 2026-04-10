@@ -98,7 +98,7 @@ void navigateWall(){
     }
 
     // If when turning right the robot cannot go forward, turn 180 deg left
-    else if (getDistance() < MIN_DISTANCE && obCounter == 1){
+    else if (getDistance() < MIN_DISTANCE*3 && obCounter == 1){
       obCounter++;
       setServoAngleSmooth(180);
       delay(500);
@@ -111,7 +111,7 @@ void navigateWall(){
     }
 
     // If the robot still cannot go forward, go back the way it came in (90 deg left)
-    else if (getDistance() < MIN_DISTANCE && obCounter == 2){
+    else if (getDistance() < MIN_DISTANCE*3 && obCounter == 2){
       obCounter = 0;
       centerServo();
       rotate(-180);
