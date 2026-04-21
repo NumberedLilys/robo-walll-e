@@ -29,9 +29,10 @@ int getDistance() {
   return validReading;
 }
 
-bool distanceCheck(){
+// A function that checks if a wall is within minimum distance for a wall
+bool distanceCheck(int multi){
   distance = getDistance();
-  if (0 < distance && distance <= MIN_DISTANCE){
+  if (0 < distance && distance <= (MIN_DISTANCE*multi)){
     return true;
   } else {
     return false;

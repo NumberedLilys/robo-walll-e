@@ -11,8 +11,8 @@ void stationary(){
   println("BUTTON PRESSED - Calibrating Gyro..");
   calibrateGyro();
   println("Calibration Complete!");
+  randomSeed(micros());
   delay(200);
-
 }
 
 // A function that runs the default state of the robot
@@ -79,54 +79,40 @@ void roaming(){
 
 // Function to explore all possible turns about 90 deg in a maze
 void navigateWall(){
+
+  bool rightClearence = 0;
+  bool leftClearence = 0;
   
-  // While loop to check all possible outcomes
-  while (true){
+  // ========== Checking ==========
+  setServoAngleSmooth(0);
+  delay(500);
+  if (!distanceCheck(3)){
+    rightClearence = 1;
+  }
+  setServoAngleSmooth(180);
+  delay(500);
+  if (!distanceCheck(3)){
+    leftClearence = 1;
+  }
+  centerServo();
 
-    // Start of navigation, turn right 90 deg
-    if (obCounter == 0){
-      obCounter++;
-      moveMotors(0, 0);
-      setServoAngleSmooth(0);
-      delay(500);
-      if (getDistance() > (MIN_DISTANCE*3)){
-        obCounter = 0;
-        centerServo();
-        rotate(90);
-        break;
-      }
-    }
-
-    // If when turning right the robot cannot go forward, turn 180 deg left
-    else if (getDistance() < MIN_DISTANCE*3 && obCounter == 1){
-      obCounter++;
-      setServoAngleSmooth(180);
-      delay(500);
-      if (getDistance() > (MIN_DISTANCE*3)){
-        obCounter = 0;
-        centerServo();
-        rotate(-90);
-        break;
-      }
-    }
-
-    // If the robot still cannot go forward, go back the way it came in (90 deg left)
-    else if (getDistance() < MIN_DISTANCE*3 && obCounter == 2){
-      obCounter = 0;
-      centerServo();
-      rotate(-180);
-      break;
-    } 
-
-    // If it can go forward, reset the obCounter variable
-    else{
-      obCounter = 0;
-      break;
+  // =========== Logic ============
+  if (rightClearence && !leftClearence){ // Only right is clear
+    rotate(90);
+  } else if (!rightClearence && leftClearence){ // Only left is clear
+    rotate(-90);
+  } else if (!rightClearence && !leftClearence){ // Both are not clear
+    rotate(180);
+  } else if (rightClearence && leftClearence){ // Both are clear
+    int randomNum = random(2);
+    if (randomNum == 0){
+      rotate(90);
+    } else{
+      rotate(-90);
     }
   }
 
   // go back to roaming mode
-  centerServo();
   state = 1;
 }
 
