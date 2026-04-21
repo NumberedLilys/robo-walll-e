@@ -233,3 +233,24 @@ bool stopCenterCheck(){
     return false;
   }
 }
+
+bool invalidLineCheck(){
+  bool flag = 0;
+  int numval = 0;
+  for (int i = 0 ; i < 4 ; i++){
+    updateLineTrackers();
+    if (numval == 3){
+      flag = 1;
+      break;
+    }
+    else if (lineRValue == 0 && lineCValue == 0 && lineLValue == 0){
+      numval++;
+    }
+    else {
+      numval = 0;
+      break;
+    }
+  }
+
+  return flag;
+}

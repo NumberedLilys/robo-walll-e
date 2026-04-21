@@ -69,3 +69,5 @@ bool CenterCheck();
 
 // Double Check for center line tracker for complete stop
 bool stopCenterCheck();
+
+bool invalidLineCheck();
