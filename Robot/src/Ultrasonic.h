@@ -4,4 +4,5 @@
 // defining get distance function
 int getDistance();
 
-bool distanceCheck();
+// A function that checks if a wall is within minimum distance for a wall
+bool distanceCheck(int multi = 1);

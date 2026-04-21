@@ -29,24 +29,10 @@ int getDistance() {
   return validReading;
 }
 
-void invalidCheck(){
-  int numval = 0;
-  for (int i = 0 ; i < 6 ; i++){
-    if (numval == 5){
-      state = 0;
-    }
-    else if (getDistance() == 0){
-      numval++;
-    }
-    else {
-      numval = 0;
-    }
-  }
-}
-
-bool distanceCheck(){
+// A function that checks if a wall is within minimum distance for a wall
+bool distanceCheck(int multi){
   distance = getDistance();
-  if (0 < distance && distance <= MIN_DISTANCE){
+  if (0 < distance && distance <= (MIN_DISTANCE*multi)){
     return true;
   } else {
     return false;
