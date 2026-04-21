@@ -41,19 +41,19 @@ void roaming(){
       
       // Adjust left
       if (getAngle() > 0.5){
-        print("[LEFT] ");
+        // print("[LEFT] ");
         moveMotors(SPEED_DRIFT, SPEED_NORMAL);
       }
       
       // Adjust right
       else if (getAngle() < -0.5){
-        print("[RIGT] ");
+        // print("[RIGT] ");
         moveMotors(SPEED_NORMAL, SPEED_DRIFT);
       }
 
       // Go forward
       else{
-        print("[FRWD] ");
+        // print("[FRWD] ");
         moveMotors(SPEED_NORMAL, SPEED_NORMAL);
       }
     }
@@ -61,6 +61,10 @@ void roaming(){
     // ========= Ultrasonic ===========
 
     if (trackingWall){
+      if (invalidCheck()){
+        state = 0;
+        break;
+      }
 
       // If near a wall, stop
       flag = distanceCheck();

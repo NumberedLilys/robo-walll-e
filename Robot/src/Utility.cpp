@@ -24,8 +24,8 @@ int lineLValue = 0;
 // ============ Adjustable functionality ======================================
 
 // Specific functionality variable true if on
-bool trackingLineBlack = 1;
-bool trackingLineWhite = 1;
+bool trackingLineBlack = 0;
+bool trackingLineWhite = 0;
 bool trackingWall = 1;
 bool trackingGyroAdjust = 1;
 
