@@ -44,6 +44,18 @@ void rotate(int targetAngle){
     resetAngle();
   }else{
 
+    // If the angle is a small angle, this prevents the inertia error from breaking the turn.
+    if (targetAngle < 0){
+      if (targetAngle > -90){
+        targetAngle = targetAngle - INERTIA_ERROR;
+      }
+    } else{
+      if (targetAngle < 90){
+        targetAngle = targetAngle + INERTIA_ERROR;
+      }
+    }
+    
+
     // Reset the angle at the beginning for accuracy
     resetAngle();
 

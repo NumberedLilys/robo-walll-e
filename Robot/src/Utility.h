@@ -30,7 +30,7 @@
 #define LINE_THRESHOLD_BLACK 875
 #define LINE_THRESHOLD_WHITE 250
 #define MIN_DISTANCE 8
-#define INERTIA_ERROR 1       // Higher if on less frictiony surface (Higher number undershots the turn)
+#define INERTIA_ERROR 10       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading

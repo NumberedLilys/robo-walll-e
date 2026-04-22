@@ -77,7 +77,8 @@ void loop() {
     // Test case
     case -1:
       stationary();
-      printInfo();
+      rotate(-1);
+      delay(500);
       break;
 
     // Stationary

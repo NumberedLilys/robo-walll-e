@@ -25,6 +25,10 @@ void roaming(){
     // Checks for lines and adjusts if necessary
     
     if (trackingLineBlack || trackingLineWhite){
+      if (invalidLineCheck()){
+        state = 0;
+        break;
+      }
       updateLineTrackers();
       if (anyTrackersOnLine()){
         state = 3;

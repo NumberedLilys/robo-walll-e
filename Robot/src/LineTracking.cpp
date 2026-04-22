@@ -8,7 +8,7 @@ bool trackerDetectLine(int trackerValue, int threshold, bool type){
 
   // Type 1, for detecting if on white or off black
   if (type){
-    if (trackerValue < threshold){
+    if (0 < trackerValue && trackerValue < threshold){
       return true;
     }
   }
@@ -189,12 +189,12 @@ void lineAdjustType(int threshold, bool type){
 
   // Left Line Sensor
   else if (trackerDetectLine(lineLValue, threshold, type)){ // if left is on the line, adjust right
-    rotate(2);
+    rotate(1);
   }
 
   // Right Line sensor
   else if (trackerDetectLine(lineRValue, threshold, type)){ // if right is on the line, adjust left
-    rotate(-2);
+    rotate(-1);
   }
 
   // If not on a line, go to roaming
