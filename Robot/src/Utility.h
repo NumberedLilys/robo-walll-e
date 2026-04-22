@@ -127,12 +127,16 @@ void pushValue(T (&arr)[N], const T& value){
 // A function to add the the array like a vector, newest value at index 0. Works only for turnarray with char[5]
 template<size_t N, size_t M>
 void pushTurn(char (&arr)[N][M], const char* value) {
+
+    // For loop that turns all of the end values the the one before it
     for (size_t i = N - 1; i > 0; i--) {
         strcpy(arr[i], arr[i - 1]);
     }
 
-    // copy new value into index 0
+    // Turns the front value to the newest value
     strncpy(arr[0], value, M - 1);
+
+    // Ensures null terminator at the end
     arr[0][M - 1] = '\0';
 }
 
