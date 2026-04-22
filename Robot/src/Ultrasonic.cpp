@@ -29,11 +29,11 @@ int getDistance() {
   return validReading;
 }
 
-bool invalidCheck(){
+bool invalidWallCheck(){
   bool flag = 0;
   int numval = 0;
-  for (int i = 0 ; i < 4 ; i++){
-    if (numval == 3){
+  for (int i = 0 ; i < 3 ; i++){
+    if (numval == 2){
       flag = 1;
       break;
     }

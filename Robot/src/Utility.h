@@ -29,8 +29,8 @@
 #define SPEED_FOLLOW 50
 #define LINE_THRESHOLD_BLACK 875
 #define LINE_THRESHOLD_WHITE 250
-#define MIN_DISTANCE 8
-#define INERTIA_ERROR 10       // Higher if on less frictiony surface (Higher number undershots the turn)
+#define MIN_DISTANCE 8 // 8
+#define INERTIA_ERROR 5       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading
@@ -47,6 +47,16 @@ extern int turnCounter;
 extern int largeAngle;
 extern int distance;
 extern int state;
+extern bool onBlackLine;
+
+// Timer variables
+extern unsigned long timerStartValue;
+extern unsigned long timerEndValue;
+
+// Data arrays
+extern unsigned long timeArray[10];
+extern char turnArray[10][5];
+extern bool doubleClearenceArray[10];
 
 // Line tracking variables instead of analog read
 extern int lineRValue;
@@ -100,3 +110,34 @@ template<typename T>
 void println(T message){
   Serial.println(message);
 }
+
+// A function to add the the array like a vector, newest value at index 0. Works for bool and numbers
+template<typename T, size_t N>
+void pushValue(T (&arr)[N], const T& value){
+
+  // For loop that turns all of the end values the the one before it
+  for (size_t i = N - 1; i > 0; i--){
+    arr[i] = arr[i - 1];
+  }
+
+  // Turns the front value to the newest value
+  arr[0] = value;
+}
+
+// A function to add the the array like a vector, newest value at index 0. Works only for turnarray with char[5]
+template<size_t N, size_t M>
+void pushTurn(char (&arr)[N][M], const char* value) {
+    for (size_t i = N - 1; i > 0; i--) {
+        strcpy(arr[i], arr[i - 1]);
+    }
+
+    // copy new value into index 0
+    strncpy(arr[0], value, M - 1);
+    arr[0][M - 1] = '\0';
+}
+
+// A function that starts the time to be added to the array of times
+void startTimer();
+
+// A function that ends the time and adds it to the array of times
+void endTimer();

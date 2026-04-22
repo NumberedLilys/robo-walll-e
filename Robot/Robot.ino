@@ -73,11 +73,22 @@ void setup() {
 void loop() {
   updateGyroAngle();
   switch (state){
+
+    // Invalid sensor input case
+    case -2:
+      moveMotors(0, 0);
+      ledOn(CRGB::Red);
+      if (continueCheck()){
+        ledOff();
+        delay(500);
+        state = 1;
+      }
+      break;
     
     // Test case
     case -1:
       stationary();
-      rotate(-1);
+      rotate(10);
       delay(500);
       break;
 
@@ -106,5 +117,6 @@ void loop() {
       setLed(state);
       lineTrackingMode();
       break;
+
   }
 }

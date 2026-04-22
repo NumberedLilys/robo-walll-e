@@ -15,6 +15,16 @@ int turnCounter = 0;
 int largeAngle = false;
 int distance = 0;
 int state = 0;
+bool onBlackLine = 0;
+
+// Timer variables
+unsigned long timerStartValue = 0;
+unsigned long timerEndValue = 0;
+
+// Data arrays
+unsigned long timeArray[10];
+char turnArray[10][5];
+bool doubleClearenceArray[10];
 
 // Line tracking variables instead of analog read
 int lineRValue = 0;
@@ -25,8 +35,8 @@ int lineLValue = 0;
 
 // Specific functionality variable true if on
 bool trackingLineBlack = 1;
-bool trackingLineWhite = 1;
-bool trackingWall = 0;
+bool trackingLineWhite = 0;
+bool trackingWall = 1;
 bool trackingGyroAdjust = 1;
 
 // ============ Wall tracking functionality ===================================
@@ -64,4 +74,17 @@ void printInfo(){
     println(analogRead(LINE_R));
     print("[DISTANCE] ");
     println(distance);
+}
+
+// A function that starts the time to be added to the array of times
+void startTimer(){
+    timerStartValue = millis();
+}
+
+// A function that ends the time and adds it to the array of times
+void endTimer(){
+    unsigned long timeDifference = 0;
+    timerEndValue = millis();
+    timeDifference = timerEndValue - timerStartValue;
+    pushValue(timeArray, timeDifference);
 }

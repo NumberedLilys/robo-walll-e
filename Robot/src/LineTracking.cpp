@@ -237,13 +237,15 @@ bool stopCenterCheck(){
 bool invalidLineCheck(){
   bool flag = 0;
   int numval = 0;
-  for (int i = 0 ; i < 4 ; i++){
+  for (int i = 0 ; i < 3 ; i++){
     updateLineTrackers();
-    if (numval == 3){
+    if (numval == 2){
       flag = 1;
       break;
     }
-    else if (lineRValue == 0 && lineCValue == 0 && lineLValue == 0){
+    else if (200 < lineRValue && lineRValue < 300 &&
+             200 < lineCValue && lineRValue < 300 &&
+             200 < lineLValue && lineRValue < 300){
       numval++;
     }
     else {

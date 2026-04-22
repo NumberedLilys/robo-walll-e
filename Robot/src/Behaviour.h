@@ -21,7 +21,8 @@ void rightTwoLeft();
 // Function to check which line to follow
 void lineTrackingMode();
 
-// A fucntion that determines if it has crossed the finish line or not
-void finished();
+// A function that checks if the robot can continue to move once a sensor has been connected
+bool continueCheck();
 
+// A dance function for the robot once he finishes the maze
 void doJig();

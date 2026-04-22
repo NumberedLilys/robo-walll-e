@@ -17,24 +17,9 @@ void stationary(){
 
 // A function that runs the default state of the robot
 void roaming(){
+  startTimer();
   moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   while (true){
-
-    // ======== Line Tracking ========
-
-    // Checks for lines and adjusts if necessary
-    
-    if (trackingLineBlack || trackingLineWhite){
-      if (invalidLineCheck()){
-        state = 0;
-        break;
-      }
-      updateLineTrackers();
-      if (anyTrackersOnLine()){
-        state = 3;
-        break;
-      }
-    }
 
     // ======== Gyro Tracking ========
 
@@ -65,8 +50,8 @@ void roaming(){
     // ========= Ultrasonic ===========
 
     if (trackingWall){
-      if (invalidCheck()){
-        state = 0;
+      if (invalidWallCheck()){
+        state = -2;
         break;
       }
 
@@ -77,8 +62,45 @@ void roaming(){
         break;
       }
       else if (flag && !stopWall){
+        endTimer();
         moveMotors(0, 0);
         state = 2;
+        break;
+      }
+    }
+
+    // ======== Line Tracking ========
+
+    // Checks for lines and adjusts if necessary
+    
+    if (trackingLineBlack || trackingLineWhite){
+      if (invalidLineCheck()){
+        state = -2;
+        break;
+      }
+      updateLineTrackers();
+
+      // Black line check for jig
+      if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
+        if (blackLineCounter == 0){
+          onBlackLine = true;
+        }
+        else if (blackLineCounter >= 1){
+          doJig();
+          state = 0;
+          break;
+        }
+      }
+      else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 1)){
+        if (onBlackLine){
+          blackLineCounter = 1;
+          onBlackLine = false;
+        }
+      }
+
+      // White line check
+      if (anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 1)){
+        state = 3;
         break;
       }
     }
@@ -106,16 +128,25 @@ void navigateWall(){
 
   // =========== Logic ============
   if (rightClearence && !leftClearence){ // Only right is clear
+    pushValue(doubleClearenceArray, false);
+    pushTurn(turnArray, "RIGT");
     rotate(90);
   } else if (!rightClearence && leftClearence){ // Only left is clear
+    pushValue(doubleClearenceArray, false);
+    pushTurn(turnArray, "LEFT");
     rotate(-90);
   } else if (!rightClearence && !leftClearence){ // Both are not clear
+    pushValue(doubleClearenceArray, false);
+    pushTurn(turnArray, "SPIN");
     rotate(180);
   } else if (rightClearence && leftClearence){ // Both are clear
+    pushValue(doubleClearenceArray, true);
     int randomNum = random(2);
     if (randomNum == 0){
+      pushTurn(turnArray, "RIGT");
       rotate(90);
     } else{
+      pushTurn(turnArray, "LEFT");
       rotate(-90);
     }
   }
@@ -168,11 +199,6 @@ void lineTrackingMode(){
     state = 1;
   }
 
-  // Check to see if on black line
-  else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
-    finished();
-  }
-
   // If on a line to stop, go to stationary
   else if (stopCenterCheck()){
     state = 0;
@@ -213,27 +239,35 @@ void lineTrackingMode(){
   else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0) && (followLineBlack && trackingLineBlack) && !stopLineBlack){
     followingLineBlack();
   }
-}
 
-// A fucntion that determines if it has crossed the finish line or not
-void finished(){
-  if ((blackLineCounter < 1)){
-    blackLineCounter++;
-    rotate(180);
-    updateLineTrackers();
-    while (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
-      updateLineTrackers();
-      moveMotors(SPEED_NORMAL, SPEED_NORMAL);
-    }
+  // Go back to roaming
+  else{
     state = 1;
   }
-
-  else if (blackLineCounter >= 1){
-    doJig();
-    state = 0;
-  }
 }
 
+// A function that checks if the robot can continue to move once a sensor has been connected
+bool continueCheck(){
+  if (!invalidWallCheck()){
+    return true;
+  }
+  // if (trackingWall && (trackingLineWhite || trackingLineBlack)){
+  //   if (!invalidWallCheck() && !invalidLineCheck()){
+  //     return true;
+  //   }
+  // } else if (trackingWall && !(trackingLineWhite || trackingLineBlack)){
+  //   if (!invalidWallCheck()){
+  //     return true;
+  //   }
+  // } else if (!trackingWall && (trackingLineWhite || trackingLineBlack)){
+  //   if (!invalidLineCheck()){
+  //     return true;
+  //   }
+  // }
+  return false;
+}
+
+// A dance function for the robot once he finishes the maze
 void doJig(){
   moveMotors(150, -150);
   delay(5000);
