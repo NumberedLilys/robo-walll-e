@@ -3,6 +3,7 @@
 Walll-e is an autonomous robot designed to perform multiple tasks using integrated sensors and control/movement systems. It is capable of line tracking black and white lines, maintaining directional stability with gyroscopic feedback, detecting obstacles or walls using ultrasonic sensors, operating a servo motor to account for drift to ensure accurate turns/movement, and utilizing an LED indicator for visual feedback.
 
 The robot is built to function independently by combining hardware components (gyroscope, servo, motors, line tracking) with programmed functionality to execute precise movements and responses to outside obstacles.
+
 <img width="4080" height="2296" alt="20260424_182310" src="https://github.com/user-attachments/assets/29aca31d-b1ca-4e82-8370-6bbe69e6e82b" />
 
 <details>
