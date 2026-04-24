@@ -72,8 +72,10 @@ The structure of the code is as follows:
     - If it detects walls close to it, it goes to the naviageWall function
     - If it drifts off course it adjusts to stay straight
 - The function navigateWall determines where to go based on its surroundings. It can make the robot turn right or left depending on where it detects a wall using the servo and ultrasonic sensor to look around.
+
 ## Troubleshooting
 If the gyroscope doesn't calibrate properly, the robot's LED goes red and requires a restart before use.
+
 Ensure all pins on the robot align with the coded pins.
 
 ## Limitations
