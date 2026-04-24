@@ -78,6 +78,7 @@ If the gyroscope doesn't calibrate properly, the robot's LED goes red and requir
 It currently has autonomous functionality but has minor limitations with its hardware.
 - The line tracking sensors have trouble distinguishing dark flooring and black tape
 - There is a limited number of hardware functions in the robot itself (no audio, one LED)
+- The Line following works but is slightly janky (is not as smooth as other functions).
 
 ## Contributing
 
