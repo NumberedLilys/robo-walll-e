@@ -56,10 +56,11 @@ Walll-e is capable of performing the following autonomous functions:
 - Tracks both white and black lines using infrared line sensors
 - Detects obstacles or walls using an ultrasonic sensor
 - Stops when an object or wall is detected within a defined distance
-- Executes a precise 90-degree right turn when it locates a line
+- Executes precise turns when given a degree parameter
 - Uses gyroscopic feedback to maintain directional stability (adjusts for exact turns)
 - Applies drift control to ensure straight-line movement
-- Provides LED feedback for status indication (Moving vs turning)
+- Provides LED feedback for status indication (dependent on state or function)
+- Does a small dance after transferring from a white line to dark flooring/black tape twice
 The integration of these systems allows the robot to navigate environments with little to no user input, with only a button click to start the program.
 
 ## Structure
@@ -68,12 +69,14 @@ The structure of the code is as follows:
 - Once the button is pressed, goes to roaming mode.
 - Roaming them looks for sensor input (Linetracking, Ultrasonic, Gyro) to determine what to do next
     - If it detects lines, it goes to linetracking
-    - If it detects walls close to it, it goes to naviageWall function
+    - If it detects walls close to it, it goes to the naviageWall function
     - If it drifts off course it adjusts to stay straight
-- Naviage wall determines where to go based on its surroundings, it can make the robot turn right or left whether it determines if it can or not using the servo and ultrasonic sensor to look around.
+- The function navigateWall determines where to go based on its surroundings. It can make the robot turn right or left depending on where it detects a wall using the servo and ultrasonic sensor to look around.
 
 ## Troubleshooting
 If the gyroscope doesn't calibrate properly, the robot's LED goes red and requires a restart before use.
+
+Ensure all pins on the robot align with the coded pins.
 
 ## Limitations
 It currently has autonomous functionality but has minor limitations with its hardware.
