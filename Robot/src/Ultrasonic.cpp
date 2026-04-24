@@ -19,7 +19,7 @@ int getDistance() {
     long duration = pulseIn(US_IN, HIGH, 30000);
     int distance = duration * 0.034 / 2;
     
-    if (duration > 0 && distance <= 200) {
+    if (duration > 0 && distance <= 500) { // 200
       validReading = distance;
     }
     
@@ -27,4 +27,34 @@ int getDistance() {
   }
   
   return validReading;
+}
+
+bool invalidWallCheck(){
+  bool flag = 0;
+  int numval = 0;
+  for (int i = 0 ; i < 3 ; i++){
+    if (numval == 2){
+      flag = 1;
+      break;
+    }
+    else if (getDistance() == 0){
+      numval++;
+    }
+    else {
+      numval = 0;
+      break;
+    }
+  }
+
+  return flag;
+}
+
+// A function that checks if a wall is within minimum distance for a wall
+bool distanceCheck(int multi){
+  distance = getDistance();
+  if (0 < distance && distance <= (MIN_DISTANCE*multi)){
+    return true;
+  } else {
+    return false;
+  }
 }

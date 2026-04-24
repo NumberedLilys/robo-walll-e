@@ -14,6 +14,12 @@
  * 
  * I also switched the stater code MTR_L and MTR_R becease it is opposite to how I would preseve left and right (From behind)
  */
+ 
+ // Pan US sensor to detect things within a curain level of left and right
+ // Know if it has fallen over
+ // Know if a sensor has been disconnected
+
+ // know when in a loop, maybe when turns right 4 times, have a counter, if counter == 2 on the forth turn do a 180.
 
 #include "src//Behaviour.h"
 
@@ -67,11 +73,35 @@ void setup() {
 void loop() {
   updateGyroAngle();
   switch (state){
+
+    // Invalid sensor input case
+    case -2:
+      moveMotors(0, 0);
+      ledOn(CRGB::Red);
+      if (continueCheck()){
+        ledOff();
+        delay(500);
+        state = 1;
+      }
+      break;
     
     // Test case
     case -1:
       stationary();
-      printInfo();
+      while (true){
+        for (int i = 0; i < 9; i++){
+          print(turnArray[i]);
+          print(" ");
+        }
+        println(turnArray[9]);
+
+        delay(2000);
+        for (int i = 0; i < 11; i++){
+          pushTurn(turnArray, "OOOO");
+        }
+        pushTurn(turnArray, "TEST");
+        pushTurn(turnArray, "TES1");
+      }
       break;
 
     // Stationary
@@ -81,21 +111,24 @@ void loop() {
       state = 1;
       break;
 
-    // Forward
+    // Main roaming state that determines functionality
     case 1:
       setLed(state);
       roaming();
       break;
     
-    // Turning method
+    // Turning method R2L
     case 2:
       setLed(state); 
-      rightTwoLeft();
+      // rightTwoLeft();
+      navigateWall();
+      break;
+    
+    // Line tracking for following a line
+    case 3: 
+      setLed(state);
+      lineTrackingMode();
       break;
 
-    case 3:
-      setLed(state);
-      lineAdjustAway();
-      break;
   }
 }

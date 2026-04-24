@@ -63,6 +63,7 @@ The integration of these systems allows the robot to navigate environments with 
 
 ## Structure
 ## Troubleshooting
+
 ## Limitations
 It currently has autonomous functionality but has minor limitations with its hardware.
 - The line tracking sensors have trouble distinguishing dark flooring and black tape
