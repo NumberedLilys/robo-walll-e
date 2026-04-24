@@ -62,7 +62,17 @@ Walll-e is capable of performing the following autonomous functions:
 The integration of these systems allows the robot to navigate environments with little to no user input, with only a button click to start the program.
 
 ## Structure
+The structure of the code is as follows:
+- Start in stationary mode (state = 0) and wait for a button press
+- Once the button is pressed, goes to roaming mode.
+- Roaming them looks for sensor input (Linetracking, Ultrasonic, Gyro) to determine what to do next
+    - If it detects lines, it goes to linetracking
+    - If it detects walls close to it, it goes to naviageWall function
+    - If it drifts off course it adjusts to stay straight
+- Naviage wall determines where to go based on its surroundings, it can make the robot turn right or left whether it determines if it can or not using the servo and ultrasonic sensor to look around.
+
 ## Troubleshooting
+If the gyroscope doesn't calibrate properly, the robot's LED goes red and requires a restart before use.
 
 ## Limitations
 It currently has autonomous functionality but has minor limitations with its hardware.
