@@ -27,10 +27,10 @@
 #define SPEED_DRIFT 85
 #define SPEED_TURN 75
 #define SPEED_FOLLOW 50
-#define LINE_THRESHOLD_BLACK 875
-#define LINE_THRESHOLD_WHITE 250
-#define MIN_DISTANCE 8 // 8
-#define INERTIA_ERROR 5       // Higher if on less frictiony surface (Higher number undershots the turn)
+#define LINE_THRESHOLD_BLACK 825 // 875
+#define LINE_THRESHOLD_WHITE 300
+#define MIN_DISTANCE 5 // 8
+#define INERTIA_ERROR 3.5 // 3.5       // Higher if on less frictiony surface (Higher number undershots the turn)
 
 // ====== PROGRAM VARIABLES ======
 extern int16_t gyroZ;                // Raw gyro Z-axis reading
@@ -138,6 +138,29 @@ void pushTurn(char (&arr)[N][M], const char* value) {
 
     // Ensures null terminator at the end
     arr[0][M - 1] = '\0';
+}
+
+// A function that clears the given array
+template<typename T, size_t N>
+void clearArr(T (&arr)[N]){
+
+  // For loop that turns all of the values to zero
+  for (size_t i = N - 1; i > 0; i--){
+    arr[i] = 0;
+  }
+  arr[0] = 0;
+}
+
+// A function that clears the turn array
+template<typename T, size_t N>
+void clearTurnArr(T (&arr)[N]){
+
+    // For loop that turns all of the end values the the one before it
+    for (size_t i = N - 1; i > 0; i--) {
+        arr[i][0] = '\0';
+    }
+
+    arr[0][0] = '\0';
 }
 
 // A function that starts the time to be added to the array of times

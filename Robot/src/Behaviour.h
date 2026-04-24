@@ -26,3 +26,6 @@ bool continueCheck();
 
 // A dance function for the robot once he finishes the maze
 void doJig();
+
+// A function that makes sure the robot does not go backwards in the maze
+void regressionPrevention();

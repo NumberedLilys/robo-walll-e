@@ -35,7 +35,7 @@ int lineLValue = 0;
 
 // Specific functionality variable true if on
 bool trackingLineBlack = 1;
-bool trackingLineWhite = 0;
+bool trackingLineWhite = 1;
 bool trackingWall = 1;
 bool trackingGyroAdjust = 1;
 

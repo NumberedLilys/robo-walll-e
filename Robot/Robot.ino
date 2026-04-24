@@ -88,8 +88,20 @@ void loop() {
     // Test case
     case -1:
       stationary();
-      rotate(10);
-      delay(500);
+      while (true){
+        for (int i = 0; i < 9; i++){
+          print(turnArray[i]);
+          print(" ");
+        }
+        println(turnArray[9]);
+
+        delay(2000);
+        for (int i = 0; i < 11; i++){
+          pushTurn(turnArray, "OOOO");
+        }
+        pushTurn(turnArray, "TEST");
+        pushTurn(turnArray, "TES1");
+      }
       break;
 
     // Stationary

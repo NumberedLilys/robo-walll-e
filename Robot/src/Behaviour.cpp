@@ -50,10 +50,10 @@ void roaming(){
     // ========= Ultrasonic ===========
 
     if (trackingWall){
-      if (invalidWallCheck()){
-        state = -2;
-        break;
-      }
+      // if (invalidWallCheck()){
+      //   state = -2;
+      //   break;
+      // }
 
       // If near a wall, stop
       flag = distanceCheck();
@@ -74,32 +74,35 @@ void roaming(){
     // Checks for lines and adjusts if necessary
     
     if (trackingLineBlack || trackingLineWhite){
-      if (invalidLineCheck()){
-        state = -2;
-        break;
-      }
+      // if (invalidLineCheck()){
+      //   state = -2;
+      //   break;
+      // }
       updateLineTrackers();
 
       // Black line check for jig
-      if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
-        if (blackLineCounter == 0){
+      if (allTrackersDetectLine(LINE_THRESHOLD_BLACK, 0)){
+        if (blackLineCounter < 2){
           onBlackLine = true;
         }
-        else if (blackLineCounter >= 1){
+        else if (blackLineCounter >= 2){
           doJig();
           state = 0;
           break;
         }
       }
-      else if (anyTrackersDetectLine(LINE_THRESHOLD_BLACK, 1)){
+      else if (allTrackersDetectLine(LINE_THRESHOLD_BLACK, 1)){
         if (onBlackLine){
-          blackLineCounter = 1;
+          blackLineCounter++;
           onBlackLine = false;
         }
       }
 
       // White line check
-      if (anyTrackersDetectLine(LINE_THRESHOLD_WHITE, 1)){
+      if (allTrackersDetectLine(LINE_THRESHOLD_WHITE, 1)){
+        clearArr(timeArray);
+        clearArr(doubleClearenceArray);
+        clearTurnArr(turnArray);
         state = 3;
         break;
       }
@@ -116,15 +119,16 @@ void navigateWall(){
   // ========== Checking ==========
   setServoAngleSmooth(0);
   delay(500);
-  if (!distanceCheck(3)){
+  if (!distanceCheck(2.5)){
     rightClearence = 1;
   }
   setServoAngleSmooth(180);
   delay(500);
-  if (!distanceCheck(3)){
+  if (!distanceCheck(2.5)){
     leftClearence = 1;
   }
   centerServo();
+  delay(200);
 
   // =========== Logic ============
   if (rightClearence && !leftClearence){ // Only right is clear
@@ -141,14 +145,7 @@ void navigateWall(){
     rotate(180);
   } else if (rightClearence && leftClearence){ // Both are clear
     pushValue(doubleClearenceArray, true);
-    int randomNum = random(2);
-    if (randomNum == 0){
-      pushTurn(turnArray, "RIGT");
-      rotate(90);
-    } else{
-      pushTurn(turnArray, "LEFT");
-      rotate(-90);
-    }
+    regressionPrevention();
   }
 
   // go back to roaming mode
@@ -272,4 +269,32 @@ void doJig(){
   moveMotors(150, -150);
   delay(5000);
   moveMotors(0, 0);
+}
+
+// A function that makes sure the robot does not go backwards in the maze
+void regressionPrevention(){
+  if (strcmp(turnArray[0], turnArray[1]) == 0 && strcmp(turnArray[1], turnArray[2]) == 0 && (strcmp(turnArray[0], "RIGT") == 0 || strcmp(turnArray[0], "LEFT") == 0)){
+    if (strcmp(turnArray[0], "LEFT") == 0){
+      ledOn(CRGB::Orange);
+      clearArr(timeArray);
+      clearArr(doubleClearenceArray);
+      clearTurnArr(turnArray);
+      rotate(-90);
+    } else{
+      ledOn(CRGB::Orange);
+      clearArr(timeArray);
+      clearArr(doubleClearenceArray);
+      clearTurnArr(turnArray);
+      rotate(90);
+    }
+  } else{
+    int randomNum = random(2);
+      if (randomNum == 0){
+        pushTurn(turnArray, "RIGT");
+        rotate(90);
+      } else{
+        pushTurn(turnArray, "LEFT");
+        rotate(-90);
+      }
+    }
 }

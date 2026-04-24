@@ -133,6 +133,7 @@ void followLineThickType(int threshold, bool type){
 
     // If all line trackers off of lines, go back to roaming
     if (allTrackersDetectLine(threshold, !type)){
+      resetAngle();
       state = 1;
       break;
     }
