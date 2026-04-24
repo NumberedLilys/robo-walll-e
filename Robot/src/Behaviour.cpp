@@ -240,7 +240,7 @@ void doJig(){
   state = 0;
 }
 
-// A function that makes sure the robot does not go backwards in the maze
+// A function that makes sure the robot does not go backwards in the maze (Stops from going back through the entrance)
 void regressionPrevention(){
 
   // If the last three turns were either right or left, turn the same direction to prevent going backward in progression
