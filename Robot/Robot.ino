@@ -1,10 +1,7 @@
 /*
  * CSCI 1063U - Elegoo Smart Car V4.0
  *
- * Note: Some code in this file is not used since this was 
- * created with the idea that it was a maze that we have not seen before.
- * 
- * I have also slightly changed the starter code function "getDistance()" 
+ * I have slightly changed the starter code function "getDistance()" 
  * to have a 10 ms delay instead of 60 ms.
  * This creates more invalid readings (0 cm distance) but since the majority of this code is 
  * reading lines the decreased delay increases accuracy in what really matters (Line Reading)
@@ -13,13 +10,9 @@
  * My version was a direct inspiration from his function in the Robo Swap day
  * 
  * I also switched the stater code MTR_L and MTR_R becease it is opposite to how I would preseve left and right (From behind)
+ * 
+ * This is the final version of walll-e during the duration of the course CSCI1063U
  */
- 
- // Pan US sensor to detect things within a curain level of left and right
- // Know if it has fallen over
- // Know if a sensor has been disconnected
-
- // know when in a loop, maybe when turns right 4 times, have a counter, if counter == 2 on the forth turn do a 180.
 
 #include "src//Behaviour.h"
 
@@ -66,6 +59,8 @@ void setup() {
   }
 
   calibrateGyro();
+
+  // Starting state, can be manually changed to -1 for test state
   state = 0;
 }
 
@@ -78,18 +73,8 @@ void loop() {
     case -1:
       stationary();
       while (true){
-        for (int i = 0; i < 9; i++){
-          print(turnArray[i]);
-          print(" ");
-        }
-        println(turnArray[9]);
-
-        delay(2000);
-        for (int i = 0; i < 11; i++){
-          pushTurn(turnArray, "OOOO");
-        }
-        pushTurn(turnArray, "TEST");
-        pushTurn(turnArray, "TES1");
+        printInfo();
+        delay(200);
       }
       break;
 
@@ -106,10 +91,9 @@ void loop() {
       roaming();
       break;
     
-    // Turning method R2L
+    // Turning method NaviageWall
     case 2:
       setLed(state); 
-      // rightTwoLeft();
       navigateWall();
       break;
     

@@ -32,19 +32,16 @@ void roaming(){
       
       // Adjust left
       if (getAngle() > 0.5){
-        // print("[LEFT] ");
         moveMotors(SPEED_DRIFT, SPEED_NORMAL);
       }
       
       // Adjust right
       else if (getAngle() < -0.5){
-        // print("[RIGT] ");
         moveMotors(SPEED_NORMAL, SPEED_DRIFT);
       }
 
       // Go forward
       else{
-        // print("[FRWD] ");
         moveMotors(SPEED_NORMAL, SPEED_NORMAL);
       }
     }
@@ -111,16 +108,22 @@ void navigateWall(){
   bool leftClearence = 0;
   
   // ========== Checking ==========
+
+  // Turn right
   setServoAngleSmooth(0);
   delay(500);
-  if (!distanceCheck(4)){
+  if (!distanceCheck(4)){ // If wall is within 4 times the min distance, it will count as being too close
     rightClearence = 1;
   }
+
+  // Turn left
   setServoAngleSmooth(180);
   delay(500);
-  if (!distanceCheck(4)){
+  if (!distanceCheck(4)){ // If wall is within 4 times the min distance, it will count as being too close
     leftClearence = 1;
   }
+
+  // Center and delay
   centerServo();
   delay(200);
 
@@ -139,6 +142,8 @@ void navigateWall(){
     rotate(180);
   } else if (rightClearence && leftClearence){ // Both are clear
     pushValue(doubleClearenceArray, true);
+
+    // Call function that determines if it will regress or not, if not turn randomly
     regressionPrevention();
   }
 
