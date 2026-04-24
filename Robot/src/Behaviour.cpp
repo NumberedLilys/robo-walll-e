@@ -119,12 +119,12 @@ void navigateWall(){
   // ========== Checking ==========
   setServoAngleSmooth(0);
   delay(500);
-  if (!distanceCheck(2.5)){
+  if (!distanceCheck(4)){
     rightClearence = 1;
   }
   setServoAngleSmooth(180);
   delay(500);
-  if (!distanceCheck(2.5)){
+  if (!distanceCheck(4)){
     leftClearence = 1;
   }
   centerServo();
@@ -266,9 +266,45 @@ bool continueCheck(){
 
 // A dance function for the robot once he finishes the maze
 void doJig(){
-  moveMotors(150, -150);
-  delay(5000);
-  moveMotors(0, 0);
+  rotate(30);
+  ledOn(CRGB::HotPink);
+  moveMotors(100, 25);
+  delay(500);
+  moveMotors(150, 15);
+  delay(1500);
+  moveMotors(100, 25);
+  delay(750);
+
+  ledOn(CRGB::Cyan);
+  moveMotors(100, 100);
+  delay(250);
+
+  ledOn(CRGB::HotPink);
+  moveMotors(25, 100);
+  delay(500);
+  moveMotors(15, 150);
+  delay(1500);
+  moveMotors(25, 100);
+  delay(750);
+
+  moveMotors(100, 100);
+  delay(250);
+
+  for (int i = 0; i < 10; i++){
+    ledOn(CRGB::Red);
+    moveMotors(100, 0);
+    delay(100);
+    ledOn(CRGB::Orange);
+    moveMotors(0, 100);
+    delay(100);
+    ledOn(CRGB::Green);
+    moveMotors(-100, 0);
+    delay(100);
+    ledOn(CRGB::Blue);
+    moveMotors(0, -100);
+    delay(100);
+  }
+  state = 0;
 }
 
 // A function that makes sure the robot does not go backwards in the maze

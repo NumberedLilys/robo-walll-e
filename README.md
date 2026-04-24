@@ -61,10 +61,12 @@ The integration of these systems allows the robot to navigate environments with 
 
 ## Structure
 ## Troubleshooting
+
 ## Limitations
 It currently has many errors in formatting due to a project structure change.
 - The functionality/autonomy is limited to a small number of functions (Only turns right when it finds a line, stopping when hitting a wall).
 - There is a limited number of hardware functions in the robot itself (no audio, one LED).
+- The Line following works but is slightly janky (is not as smooth as other functions).
 
 ## Contributing
 
