@@ -17,6 +17,8 @@ void stationary(){
 
 // A function that runs the default state of the robot
 void roaming(){
+
+  // Timer function for the time array
   startTimer();
   moveMotors(SPEED_NORMAL, SPEED_NORMAL);
   while (true){
@@ -50,10 +52,6 @@ void roaming(){
     // ========= Ultrasonic ===========
 
     if (trackingWall){
-      // if (invalidWallCheck()){
-      //   state = -2;
-      //   break;
-      // }
 
       // If near a wall, stop
       flag = distanceCheck();
@@ -74,10 +72,6 @@ void roaming(){
     // Checks for lines and adjusts if necessary
     
     if (trackingLineBlack || trackingLineWhite){
-      // if (invalidLineCheck()){
-      //   state = -2;
-      //   break;
-      // }
       updateLineTrackers();
 
       // Black line check for jig
@@ -152,44 +146,11 @@ void navigateWall(){
   state = 1;
 }
 
-// A function that uses the turn right twice then left method of navigating a maze
-void rightTwoLeft(){
-  while (true){
-
-    // turn right 90 deg
-    if (turnCounter < 2){
-      turnCounter++;
-      delay(500);
-      rotate(90);
-      break;
-    
-    // turn Left 90 deg
-    } else if(turnCounter >= 2){
-      turnCounter = 0;
-      delay(500);
-      rotate(-90);
-
-      // instead, turn 180 if cannot go forward after turning left
-      if (distanceCheck()){
-        rotate(180);
-        turnCounter = 2;
-      }
-      break;
-    }
-  }
-
-  // go back to roaming mode
-  state = 1;
-}
-
 // Function that determines what to do for line tracking
 void lineTrackingMode(){
 
   updateLineTrackers();
   moveMotors(0, 0);
-
-  // *Needs to add the other if statesments for line adjust and stopping
-  // *Need to make different varients to line adjust so it works with just white or black lines
 
   // If not on a line, go back to roaming
   if (allTrackersOffLine()){
@@ -199,18 +160,6 @@ void lineTrackingMode(){
   // If on a line to stop, go to stationary
   else if (stopCenterCheck()){
     state = 0;
-  }
-
-  // ========== Turn on line modes ============================================
-
-  // If center is on black line and turnLineBlack is true, turnOnLine
-  else if (turnLineBlack && trackerDetectLine(lineCValue, LINE_THRESHOLD_BLACK, 0) && trackingLineBlack){
-    turnOnLine();
-  }
-
-  // If center is on white line and turnLineWhite is true, turnOnLine
-  else if (turnLineWhite && trackerDetectLine(lineCValue, LINE_THRESHOLD_WHITE, 1) && trackingLineWhite){
-    turnOnLine();
   }
 
   // ========== Adjust line modes =============================================
@@ -241,27 +190,6 @@ void lineTrackingMode(){
   else{
     state = 1;
   }
-}
-
-// A function that checks if the robot can continue to move once a sensor has been connected
-bool continueCheck(){
-  if (!invalidWallCheck()){
-    return true;
-  }
-  // if (trackingWall && (trackingLineWhite || trackingLineBlack)){
-  //   if (!invalidWallCheck() && !invalidLineCheck()){
-  //     return true;
-  //   }
-  // } else if (trackingWall && !(trackingLineWhite || trackingLineBlack)){
-  //   if (!invalidWallCheck()){
-  //     return true;
-  //   }
-  // } else if (!trackingWall && (trackingLineWhite || trackingLineBlack)){
-  //   if (!invalidLineCheck()){
-  //     return true;
-  //   }
-  // }
-  return false;
 }
 
 // A dance function for the robot once he finishes the maze
@@ -309,13 +237,19 @@ void doJig(){
 
 // A function that makes sure the robot does not go backwards in the maze
 void regressionPrevention(){
+
+  // If the last three turns were either right or left, turn the same direction to prevent going backward in progression
   if (strcmp(turnArray[0], turnArray[1]) == 0 && strcmp(turnArray[1], turnArray[2]) == 0 && (strcmp(turnArray[0], "RIGT") == 0 || strcmp(turnArray[0], "LEFT") == 0)){
+    
+    // If left
     if (strcmp(turnArray[0], "LEFT") == 0){
       ledOn(CRGB::Orange);
       clearArr(timeArray);
       clearArr(doubleClearenceArray);
       clearTurnArr(turnArray);
       rotate(-90);
+
+    // If right
     } else{
       ledOn(CRGB::Orange);
       clearArr(timeArray);
@@ -323,12 +257,18 @@ void regressionPrevention(){
       clearTurnArr(turnArray);
       rotate(90);
     }
+
+  // If both ways are clear and the last turns were not the same, randomize which way to go
   } else{
     int randomNum = random(2);
       if (randomNum == 0){
+
+        // Push to turn array
         pushTurn(turnArray, "RIGT");
         rotate(90);
       } else{
+
+        // push to turn array
         pushTurn(turnArray, "LEFT");
         rotate(-90);
       }

@@ -40,19 +40,10 @@ void followingLineWhite();
 // Function that follows both types of lines
 void followingLineBoth();
 
-// ========== Thin Line Tracking ==============================================
-
-// A function that goes forward and adjusts until it detects all sensors off and decided which way to go
-void followLineThinType(int threshold, bool type);
-
 // ========== Thick Line Tracking =============================================
 
 // A function that goes forward and adjusts until it detects all sensors off and decided which way to go
 void followLineThickType(int threshold, bool type);
-
-// ========== Turn line tracking functions ====================================
-
-void turnOnLine();
 
 // ============ Adjust line tracking functions ================================
 
@@ -69,5 +60,3 @@ bool CenterCheck();
 
 // Double Check for center line tracker for complete stop
 bool stopCenterCheck();
-
-bool invalidLineCheck();

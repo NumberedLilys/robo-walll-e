@@ -15,14 +15,8 @@ void roaming();
 // Function to explore all possible turns about 90 deg in a maze
 void navigateWall();
 
-// Function that turns right twice and then left
-void rightTwoLeft();
-
 // Function to check which line to follow
 void lineTrackingMode();
-
-// A function that checks if the robot can continue to move once a sensor has been connected
-bool continueCheck();
 
 // A dance function for the robot once he finishes the maze
 void doJig();
