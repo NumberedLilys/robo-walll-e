@@ -1,6 +1,6 @@
-# Robot Project (Wall-e)
+# Robot Project (Walll-e)
 ## Description
-(Name) is an autonomous robot designed to perform multiple tasks using integrated sensors and control/movement systems. It is capable of line tracking black and white lines, maintaining directional stability with gyroscopic feedback, detecting obstacles or walls using ultrasonic sensors, operating a servo motor to account for drift to ensure accurate turns/movement, and utilizing an LED indicator for visual feedback.
+Walll-e is an autonomous robot designed to perform multiple tasks using integrated sensors and control/movement systems. It is capable of line tracking black and white lines, maintaining directional stability with gyroscopic feedback, detecting obstacles or walls using ultrasonic sensors, operating a servo motor to account for drift to ensure accurate turns/movement, and utilizing an LED indicator for visual feedback.
 
 The robot is built to function independently by combining hardware components (gyroscope, servo, motors, line tracking) with programmed functionality to execute precise movements and responses to outside obstacles.
 (Photo of robot?)
@@ -39,6 +39,8 @@ There is an expectation that the user has a working robot with all of the functi
 - LED light
 
 ### Software / Dependencies
+- Arduino/VScode
+- FastLED installed onto Arduino
 
 ## Usage
 - Assemble the robot with all required hardware components.
@@ -49,7 +51,7 @@ There is an expectation that the user has a working robot with all of the functi
 - Place the robot on a suitable surface with line markings and sufficient space for obstacle detection.
 
 ### What it does
-(Name) is capable of performing the following autonomous functions:
+Walll-e is capable of performing the following autonomous functions:
 - Tracks both white and black lines using infrared line sensors
 - Detects obstacles or walls using an ultrasonic sensor
 - Stops when an object or wall is detected within a defined distance
@@ -63,10 +65,9 @@ The integration of these systems allows the robot to navigate environments with 
 ## Troubleshooting
 
 ## Limitations
-It currently has many errors in formatting due to a project structure change.
-- The functionality/autonomy is limited to a small number of functions (Only turns right when it finds a line, stopping when hitting a wall).
-- There is a limited number of hardware functions in the robot itself (no audio, one LED).
-- The Line following works but is slightly janky (is not as smooth as other functions).
+It currently has autonomous functionality but has minor limitations with its hardware.
+- The line tracking sensors have trouble distinguishing dark flooring and black tape
+- There is a limited number of hardware functions in the robot itself (no audio, one LED)
 
 ## Contributing
 
