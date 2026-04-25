@@ -78,6 +78,7 @@ void roaming(){
         }
         else if (blackLineCounter >= 2){
           doJig();
+          blackLineCounter = 0;
           state = 0;
           break;
         }
