@@ -4,6 +4,8 @@ Walll-e is an autonomous robot designed to perform multiple tasks using integrat
 
 The robot is built to function independently by combining hardware components (gyroscope, servo, motors, line tracking) with programmed functionality to execute precise movements and responses to outside obstacles.
 
+The purpose of this project was to get hands-on experience designing and implementing code for a physical robot while learning how to properly format/design code and complete different tasks in a set time-frame.
+
 <img width="4080" height="2296" alt="20260424_182310" src="https://github.com/user-attachments/assets/29aca31d-b1ca-4e82-8370-6bbe69e6e82b" />
 
 <details>
